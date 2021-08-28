@@ -89,6 +89,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\brody\source\repos\tcp-server\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,20 +141,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CancelOrder.cpp" />
-    <ClCompile Include="ModifyOrder.cpp" />
-    <ClCompile Include="Order.cpp" />
-    <ClCompile Include="OrderCore.cpp" />
-    <ClCompile Include="ServerLogger.cpp" />
-    <ClCompile Include="TcpServer.cpp" />
+    <ClCompile Include="src\Orderbook\CancelOrder.cpp" />
+    <ClCompile Include="src\Orderbook\ModifyOrder.cpp" />
+    <ClCompile Include="src\Orderbook\Order.cpp" />
+    <ClCompile Include="src\Orderbook\OrderCore.cpp" />
+    <ClCompile Include="src\Logging\ServerLogger.cpp" />
+    <ClCompile Include="src\TradingEngine\TradingEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CancelOrder.h" />
-    <ClInclude Include="ModifyOrder.h" />
-    <ClInclude Include="Order.h" />
-    <ClInclude Include="OrderCore.h" />
-    <ClInclude Include="ServerLogger.h" />
-    <ClInclude Include="TcpServer.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\CancelOrder.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\ModifyOrder.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Order.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderCore.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
+    <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tcp-server.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
