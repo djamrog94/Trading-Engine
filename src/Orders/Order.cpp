@@ -1,12 +1,12 @@
-#include "TradingEngine/Orderbook/Order.h"
+#include "TradingEngine/Orders/Order.h"
 
-namespace TradingEngine::Orderbook {
-	void TradingEngine::Orderbook::Order::IncreaseQuantity(uint16_t quantityDelta)
+namespace TradingEngine::Orders {
+	void Order::IncreaseQuantity(uint16_t quantityDelta)
 	{
 		currentQuantity_ += quantityDelta;
 	}
 
-	void TradingEngine::Orderbook::Order::DecreaseQuantity(uint16_t quantityDelta)
+	void Order::DecreaseQuantity(uint16_t quantityDelta)
 	{
 		if (quantityDelta > currentQuantity_) throw std::invalid_argument("Delta cannot be greater than current quantity!");
 		currentQuantity_ -= quantityDelta;

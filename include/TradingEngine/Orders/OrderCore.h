@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <iostream>
-namespace TradingEngine::Orderbook {
+namespace TradingEngine::Orders {
 	class OrderCore
 	{
 	public:

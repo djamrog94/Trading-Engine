@@ -1,6 +1,6 @@
-#include "TradingEngine/Orderbook/OrderCore.h"
+#include "TradingEngine/Orders/OrderCore.h"
 
-namespace TradingEngine::Orderbook {
+namespace TradingEngine::Orders {
 	long OrderCore::getOrderId() const
 	{
 		return orderId_;

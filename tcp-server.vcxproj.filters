@@ -24,16 +24,16 @@
     <ClCompile Include="src\Logging\ServerLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderCore.cpp">
+    <ClCompile Include="src\Orders\OrderCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\CancelOrder.cpp">
+    <ClCompile Include="src\Orders\CancelOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\ModifyOrder.cpp">
+    <ClCompile Include="src\Orders\ModifyOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\Order.cpp">
+    <ClCompile Include="src\Orders\Order.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,16 +44,16 @@
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderCore.h">
+    <ClInclude Include="include\TradingEngine\Orders\OrderCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\CancelOrder.h">
+    <ClInclude Include="include\TradingEngine\Orders\CancelOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\ModifyOrder.h">
+    <ClInclude Include="include\TradingEngine\Orders\ModifyOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\Order.h">
+    <ClInclude Include="include\TradingEngine\Orders\Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">

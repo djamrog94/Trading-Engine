@@ -1,9 +1,9 @@
 #pragma once
-#include "TradingEngine/Orderbook/OrderCore.h"
-#include "TradingEngine/Orderbook/ModifyOrder.h"
+#include "TradingEngine/Orders/OrderCore.h"
+#include "TradingEngine/Orders/ModifyOrder.h"
 #include <string>
 
-namespace TradingEngine::Orderbook {
+namespace TradingEngine::Orders {
 	class CancelOrder : public OrderCore
 	{
 	public:
