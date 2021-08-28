@@ -1,6 +1,7 @@
 #pragma once
 #include <boost/log/trivial.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
+
 enum severity_level
 {
 	Debug,

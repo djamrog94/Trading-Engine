@@ -21,6 +21,7 @@ namespace expr = boost::log::expressions;
 namespace sinks = boost::log::sinks;
 namespace attrs = boost::log::attributes;
 namespace keywords = boost::log::keywords;
+
 bool onlyWarnings(const boost::log::attribute_value_set& set)
 {
 	return set["Severity"].extract<severity_level>() > 0;

@@ -141,18 +141,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Orderbook\CancelOrder.cpp" />
-    <ClCompile Include="src\Orderbook\ModifyOrder.cpp" />
-    <ClCompile Include="src\Orderbook\Order.cpp" />
-    <ClCompile Include="src\Orderbook\OrderCore.cpp" />
+    <ClCompile Include="src\Orders\CancelOrder.cpp" />
+    <ClCompile Include="src\Orders\ModifyOrder.cpp" />
+    <ClCompile Include="src\Orders\Order.cpp" />
+    <ClCompile Include="src\Orders\OrderCore.cpp" />
     <ClCompile Include="src\Logging\ServerLogger.cpp" />
     <ClCompile Include="src\TradingEngine\TradingEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\TradingEngine\Orderbook\CancelOrder.h" />
-    <ClInclude Include="include\TradingEngine\Orderbook\ModifyOrder.h" />
-    <ClInclude Include="include\TradingEngine\Orderbook\Order.h" />
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderCore.h" />
+    <ClInclude Include="include\TradingEngine\Orders\CancelOrder.h" />
+    <ClInclude Include="include\TradingEngine\Orders\ModifyOrder.h" />
+    <ClInclude Include="include\TradingEngine\Orders\Order.h" />
+    <ClInclude Include="include\TradingEngine\Orders\OrderCore.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h" />

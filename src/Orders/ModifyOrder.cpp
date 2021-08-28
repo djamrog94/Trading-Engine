@@ -1,7 +1,7 @@
-#include "TradingEngine/Orderbook/ModifyOrder.h"
-#include "TradingEngine/Orderbook/OrderCore.h"
+#include "TradingEngine/Orders/ModifyOrder.h"
+#include "TradingEngine/Orders/OrderCore.h"
 
-namespace TradingEngine::Orderbook {
+namespace TradingEngine::Orders {
 	long ModifyOrder::getPrice()
 	{
 		return price_;

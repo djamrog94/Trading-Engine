@@ -1,7 +1,7 @@
 #pragma once
-#include "TradingEngine/Orderbook/OrderCore.h"
+#include "TradingEngine/Orders/OrderCore.h"
 
-namespace TradingEngine::Orderbook {
+namespace TradingEngine::Orders {
 	class ModifyOrder : public OrderCore
 	{
 	public:

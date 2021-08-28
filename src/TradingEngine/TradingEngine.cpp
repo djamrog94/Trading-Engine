@@ -133,18 +133,18 @@ public:
 				(
 					std::bind(&server::post, this, _1),
 					[&, weak = std::weak_ptr(client)]
+		{
+			if (auto shared = weak.lock(); shared && clients.erase(shared))
 			{
-				if (auto shared = weak.lock(); shared && clients.erase(shared))
+				post("We are one less\n\r");
+				if (clients.size() == 0)
 				{
-					post("We are one less\n\r");
-					if (clients.size() == 0)
-					{
-						BOOST_LOG_SEV(lg, Info) << "Engine shutting down!";
-						io_context.stop();
-					}
+					BOOST_LOG_SEV(lg, Info) << "Engine shutting down!";
+					io_context.stop();
 				}
 			}
-			);
+		}
+		);
 
 				async_accept();
 
