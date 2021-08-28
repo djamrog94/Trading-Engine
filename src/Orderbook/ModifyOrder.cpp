@@ -1,5 +1,5 @@
-#include "ModifyOrder.h"
-#include "CancelOrder.h"
+#include "TradingEngine/Orderbook/ModifyOrder.h"
+#include "TradingEngine/Orderbook/OrderCore.h"
 
 namespace TradingEngine::Orderbook {
 	long ModifyOrder::getPrice()

@@ -18,43 +18,51 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TcpServer.cpp">
+    <ClCompile Include="src\TradingEngine\TradingEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ServerLogger.cpp">
+    <ClCompile Include="src\Logging\ServerLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OrderCore.cpp">
+    <ClCompile Include="src\Orderbook\OrderCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CancelOrder.cpp">
+    <ClCompile Include="src\Orderbook\CancelOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModifyOrder.cpp">
+    <ClCompile Include="src\Orderbook\ModifyOrder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Order.cpp">
+    <ClCompile Include="src\Orderbook\Order.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TcpServer.h">
+    <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ServerLogger.h">
+    <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OrderCore.h">
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderCore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CancelOrder.h">
+    <ClInclude Include="include\TradingEngine\Orderbook\CancelOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModifyOrder.h">
+    <ClInclude Include="include\TradingEngine\Orderbook\ModifyOrder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Order.h">
+    <ClInclude Include="include\TradingEngine\Orderbook\Order.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tcp-server.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
