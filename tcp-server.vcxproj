@@ -140,10 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CancelOrder.cpp" />
+    <ClCompile Include="ModifyOrder.cpp" />
+    <ClCompile Include="Order.cpp" />
+    <ClCompile Include="OrderCore.cpp" />
     <ClCompile Include="ServerLogger.cpp" />
     <ClCompile Include="TcpServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CancelOrder.h" />
+    <ClInclude Include="ModifyOrder.h" />
+    <ClInclude Include="Order.h" />
+    <ClInclude Include="OrderCore.h" />
     <ClInclude Include="ServerLogger.h" />
     <ClInclude Include="TcpServer.h" />
   </ItemGroup>

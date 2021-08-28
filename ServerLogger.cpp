@@ -21,53 +21,53 @@ namespace expr = boost::log::expressions;
 namespace sinks = boost::log::sinks;
 namespace attrs = boost::log::attributes;
 namespace keywords = boost::log::keywords;
-
 bool onlyWarnings(const boost::log::attribute_value_set& set)
 {
-    return set["Severity"].extract<severity_level>() > 0;
+	return set["Severity"].extract<severity_level>() > 0;
 }
 
 void severity_and_message(const boost::log::record_view& view, boost::log::formatting_ostream& os)
 {
-    os << view.attribute_values()["Severity"].extract<severity_level>() << ": " <<
-        view.attribute_values()["Message"].extract<std::string>();
+	os << view.attribute_values()["Severity"].extract<severity_level>() << ": " <<
+		view.attribute_values()["Message"].extract<std::string>();
 }
 
 BOOST_LOG_GLOBAL_LOGGER_INIT(logger, boost::log::sources::severity_logger_mt< severity_level >)
 {
-    boost::log::sources::severity_logger_mt< severity_level > logger;
+	boost::log::sources::severity_logger_mt< severity_level > logger;
 
-    // add a text sink
-    typedef sinks::asynchronous_sink<sinks::text_ostream_backend> text_sink;
-    boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
+	// add a text sink
+	typedef sinks::asynchronous_sink<sinks::text_ostream_backend> text_sink;
+	boost::shared_ptr<text_sink> sink = boost::make_shared<text_sink>();
 
 
-    // add "console" output stream to our sink
-    boost::shared_ptr<std::ostream> stream{ &std::clog, boost::null_deleter{} };
-    sink->locked_backend()->add_stream(stream);
+	// add "console" output stream to our sink
+	boost::shared_ptr<std::ostream> stream{ &std::clog, boost::null_deleter{} };
+	sink->locked_backend()->add_stream(stream);
 
-    boost::log::register_simple_formatter_factory< severity_level, char >("Severity");
+	boost::log::register_simple_formatter_factory< severity_level, char >("Severity");
 
-    // add "file" output to our sink
-    logging::add_file_log
-    (
-      keywords::file_name = "/logs/test_%N.log",
-      keywords::format = "[%TimeStamp%]: {%Severity%} - %Message%"                  
-    );
+	// add "file" output to our sink
+	logging::add_file_log
+	(
+		keywords::file_name = "/logs/test_%N.log",
+		keywords::format = "[%TimeStamp%]: {%Severity%} - %Message%"
+	);
 
-    // specify the format of the log message
-    sink->set_formatter(&severity_and_message);
+	// specify the format of the log message
+	sink->set_formatter(&severity_and_message);
 
-    // just log messages with severity >= SEVERITY_THRESHOLD are written
-    sink->set_filter(&onlyWarnings);
+	// just log messages with severity >= SEVERITY_THRESHOLD are written
+	sink->set_filter(&onlyWarnings);
 
-    // "register" our sink
-    logging::core::get()->add_sink(sink);
+	// "register" our sink
+	logging::core::get()->add_sink(sink);
 
-    logging::add_common_attributes();
+	logging::add_common_attributes();
 
-    // save to a file
+	// save to a file
 
-    return logger;
+	return logger;
 
 }
+
