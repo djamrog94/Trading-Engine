@@ -3,6 +3,8 @@
 namespace TradingEngine::Orderbook {
 	Limit::Limit() = default;
 
+	Limit::Limit(long price) : price_(price) {}
+
 	long Limit::getPrice()
 	{
 		return price_;

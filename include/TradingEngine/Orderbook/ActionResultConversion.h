@@ -9,9 +9,10 @@
 namespace TradingEngine::Orderbook {
 	class ActionResultConversion
 	{
+	public:
 		static OrderStatuses::CancelOrderStatus generateCancelOrderStatus(Orders::CancelOrder obe);
-		static OrderStatuses::NewOrderStatus generateCancelOrderStatus(Orders::Order obe);
-		static OrderStatuses::ModifyOrderStatus generateCancelOrderStatus(Orders::ModifyOrder obe);
+		static OrderStatuses::NewOrderStatus generateNewOrderStatus(Orders::Order obe);
+		static OrderStatuses::ModifyOrderStatus generateModifyOrderStatus(Orders::ModifyOrder obe);
 	};
 }
 

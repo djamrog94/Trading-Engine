@@ -5,6 +5,7 @@
 namespace TradingEngine::Orderbook::Reject {
 	class RejectCreator
 	{
+	public:
 		static Rejection generateModyifyRejection(Orders::ModifyOrder mo, Reject::rejectionReason rr);
 	};
 }

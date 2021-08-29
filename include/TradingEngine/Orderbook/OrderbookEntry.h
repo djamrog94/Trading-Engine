@@ -7,9 +7,11 @@ namespace TradingEngine::Orderbook {
 	class OrderbookEntry
 	{
 	public:
-		OrderbookEntry(Orders::Order currentOrder, Limit* parentLimit);
+		OrderbookEntry(Orders::Order currentOrder, Limit& parentLimit);
+		OrderbookEntry(Orders::Order currentOrder, const Limit& parentLimit);
 		Orders::Order getCurrent();
-		Limit* getParentLimit();
+		Limit& getParentLimit();
+		friend bool operator==(OrderbookEntry&, OrderbookEntry&);
 
 		OrderbookEntry getNext();
 	    OrderbookEntry getPrevious();
@@ -22,6 +24,12 @@ namespace TradingEngine::Orderbook {
 
 	private:
 		Orders::Order currentOrder_;
-		Limit* parentLimit_;
+		Limit& parentLimit_;
 	};
+
+	bool operator==(OrderbookEntry& lhs, OrderbookEntry& rhs)
+	{
+		return lhs == rhs;
+	}
+
 }

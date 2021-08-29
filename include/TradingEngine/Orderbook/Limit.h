@@ -7,6 +7,7 @@ namespace TradingEngine::Orderbook {
 	{
 	public:
 		Limit();
+		Limit(long price);
 		long getPrice();
 		OrderbookEntry getHead();
 		OrderbookEntry getTail();

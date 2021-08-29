@@ -6,12 +6,12 @@ namespace TradingEngine::Orderbook {
         return OrderStatuses::CancelOrderStatus();
     }
 
-    OrderStatuses::NewOrderStatus ActionResultConversion::generateCancelOrderStatus(Orders::Order obe)
+    OrderStatuses::NewOrderStatus ActionResultConversion::generateNewOrderStatus(Orders::Order obe)
     {
         return OrderStatuses::NewOrderStatus();
     }
 
-    OrderStatuses::ModifyOrderStatus ActionResultConversion::generateCancelOrderStatus(Orders::ModifyOrder obe)
+    OrderStatuses::ModifyOrderStatus ActionResultConversion::generateModifyOrderStatus(Orders::ModifyOrder obe)
     {
         return OrderStatuses::ModifyOrderStatus();
     }

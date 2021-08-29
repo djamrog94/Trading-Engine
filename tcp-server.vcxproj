@@ -141,6 +141,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Orderbook\Orderbook.cpp" />
+    <ClCompile Include="src\Orderbook\MatchingOrderBook.cpp" />
+    <ClCompile Include="src\Orderbook\OrderEntryOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\OrderBookResult.cpp" />
     <ClCompile Include="src\Orderbook\ActionResultConversion.cpp" />
     <ClCompile Include="src\Orderbook\OrderbookEntry.cpp" />
@@ -172,6 +175,9 @@
     <ClInclude Include="include\TradingEngine\Orderbook\Limit.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderbookEntry.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderBookResult.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderEntryOrderbook.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchingOrderBook.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Orderbook.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h" />

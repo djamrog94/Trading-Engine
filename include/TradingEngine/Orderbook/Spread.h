@@ -1,15 +1,17 @@
 #pragma once
+#include <boost/optional.hpp>
+using namespace boost;
 namespace TradingEngine::Orderbook {
 	class Spread
 	{
 	public:
-		Spread(long bid, long ask);
+		Spread(optional<long> bid, optional<long> ask);
 
-		long getBid();
-		long getAsk();
+		optional<long> getBid();
+		optional<long> getAsk();
 
 	private:
-		long bid_;
-		long ask_;
+		optional<long> bid_;
+		optional<long> ask_;
 	};
 }
