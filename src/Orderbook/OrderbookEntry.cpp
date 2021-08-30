@@ -14,7 +14,6 @@ namespace TradingEngine::Orderbook {
 		return parentLimit_;
 	}
 
-
 	OrderbookEntry OrderbookEntry::getNext()
 	{
 		return *Next;

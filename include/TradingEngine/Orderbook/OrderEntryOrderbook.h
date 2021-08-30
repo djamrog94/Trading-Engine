@@ -11,20 +11,20 @@ namespace TradingEngine::Orderbook {
 	class OrderEntryOrderbook
 	{
 	public:
-		virtual OrderBookResult addOrder(Orders::Order order);
-		virtual OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
-		virtual OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
-		virtual Spread getSpread();
-		virtual bool containsOrder(long orderId);
+		OrderBookResult addOrder(Orders::Order order);
+		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
+		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
+		Spread getSpread();
+		bool containsOrder(long orderId);
 		int getCount();
 	private:
-		int count_;
+		int count_ = 0;
 	};
 
 	class RetrievalOrderbook : OrderEntryOrderbook
 	{
-		virtual std::vector<OrderbookEntry> getAskOrders();
-		virtual std::vector<OrderbookEntry> getBidOrders();
+		std::vector<OrderbookEntry> getAskOrders();
+		std::vector<OrderbookEntry> getBidOrders();
 	};
 
 }

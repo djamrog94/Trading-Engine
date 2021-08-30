@@ -11,6 +11,7 @@ namespace TradingEngine::Orderbook {
 		long getPrice();
 		OrderbookEntry getHead();
 		OrderbookEntry getTail();
+		friend bool operator==(const Limit& lhs, const Limit& rhs);
 
 		void setPrice(long price);
 		void setHead(OrderbookEntry& head);
@@ -20,26 +21,11 @@ namespace TradingEngine::Orderbook {
 		OrderbookEntry* head_;
 		OrderbookEntry* tail_;
 	};
-
-	class BidLimitComparer
+	
+	inline bool operator==(const Limit& lhs, const Limit& rhs)
 	{
-	public:
-		int Compare(Limit x, Limit y)
-		{
-			if (x.price_ == y.price_) return 0;
-			else if (x.price_ > y.price_) return 1;
-			else return -1;
-		}
-	};
+		if (lhs.price_ && rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
+		return false;
+	}
 
-	class AskLimitComparer
-	{
-	public:
-		int Compare(Limit x, Limit y)
-		{
-			if (x.price_ == y.price_) return 0;
-			else if (x.price_ > y.price_) return 1;
-			else return -1;
-		}
-	};
 }
