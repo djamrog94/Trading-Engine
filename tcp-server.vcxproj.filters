@@ -66,6 +66,15 @@
     <ClCompile Include="src\Orderbook\OrderBookResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Orderbook\OrderEntryOrderbook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\MatchingOrderBook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\Orderbook.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
@@ -117,6 +126,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\OrderBookResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderEntryOrderbook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchingOrderBook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\Orderbook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

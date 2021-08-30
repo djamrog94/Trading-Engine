@@ -9,6 +9,7 @@ namespace TradingEngine::Orders {
 		Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide);
 
 		Order(ModifyOrder& modifyOrder);
+		friend bool operator==(const Order& lhs, const Order& rhs);
 
 		void IncreaseQuantity(uint16_t quantityDelta);
 		void DecreaseQuantity(uint16_t quantityDelta);
@@ -20,4 +21,11 @@ namespace TradingEngine::Orders {
 	private:
 		OrderCore orderBase_;
 	};
+
+
+	inline bool operator==(const Order& lhs, const Order& rhs)
+	{
+		if (lhs.orderBase_.getOrderId() && rhs.orderBase_.getOrderId()) return true;
+		return false;
+	}
 }
