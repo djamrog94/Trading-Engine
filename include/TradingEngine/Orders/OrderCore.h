@@ -5,20 +5,18 @@ namespace TradingEngine::Orders {
 	class OrderCore
 	{
 	public:
-		OrderCore();
-
-		OrderCore(long orderId, std::string username, int securityID);
+		OrderCore(long orderId, std::string username, int securityId);
 
 		long getOrderId() const;
 		std::string getUsername() const;
 		int getSecurityId() const;
 		static OrderCore createOrderCore(long orderId, std::string username, int securityId);
-		std::string toString();
+		std::string toString() const;
 
 	private:
-		long orderId_;
-		std::string username_;
-		int securityID_;
+		const long orderId_;
+		const std::string username_;
+		const int securityId_;
 	};
 
 

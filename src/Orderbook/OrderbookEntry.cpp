@@ -2,6 +2,7 @@
 
 namespace TradingEngine::Orderbook {
 
+
 	OrderbookEntry::OrderbookEntry(Orders::Order currentOrder, Limit& parentLimit)
 		: currentOrder_(currentOrder), parentLimit_(parentLimit), Next(NULL), Previous(NULL) {}
 

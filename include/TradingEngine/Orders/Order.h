@@ -18,14 +18,12 @@ namespace TradingEngine::Orders {
 		uint16_t initialQuantity_;
 		uint16_t currentQuantity_;
 		bool isBuySide_;
-	private:
-		OrderCore orderBase_;
 	};
 
 
 	inline bool operator==(const Order& lhs, const Order& rhs)
 	{
-		if (lhs.orderBase_.getOrderId() && rhs.orderBase_.getOrderId()) return true;
+		if (lhs.getOrderId() == rhs.getOrderId()) return true;
 		return false;
 	}
 }

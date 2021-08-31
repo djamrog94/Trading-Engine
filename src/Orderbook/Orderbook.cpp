@@ -3,6 +3,8 @@
 #include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 
 namespace TradingEngine::Orderbook {
+
+    Orderbook::Orderbook() = default;
     Orderbook::Orderbook(Instrument instrument)
         : instrument_(instrument) {}
 
@@ -34,7 +36,7 @@ namespace TradingEngine::Orderbook {
             removeOrder(co, obe, orders_);
             Orders::Order ord = Orders::Order(modifyOrder);
             if (modifyOrder.isBuySide_) addOrder(ord, obe.getParentLimit(), bidLimits_, orders_);
-           else addOrder(ord, obe.getParentLimit(), askLimits_, orders_);
+            else addOrder(ord, obe.getParentLimit(), askLimits_, orders_);
         }
         else
         {
@@ -76,7 +78,7 @@ namespace TradingEngine::Orderbook {
         return asks;
     }
 
-    std::vector<OrderbookEntry> Orderbook::getBuyOrders()
+    std::vector<OrderbookEntry> Orderbook::getBidOrders()
     {
         std::vector<OrderbookEntry> bids;
         for (auto it : bidLimits_)
@@ -95,57 +97,78 @@ namespace TradingEngine::Orderbook {
         return Spread(bestAsk, bestBid);
     }
 
-    void Orderbook::addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, decltype(compare)> limitLevels, std::map<long, OrderbookEntry> internalBook)
+    int Orderbook::getCount()
     {
+        return orders_.size();
+    }
+
+    template <typename T> 
+    void Orderbook::addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook)
+    {
+
         auto ll = limitLevels.find(baseLimit);
         if (ll != limitLevels.end())
         {
-            //OrderbookEntry newEntry = OrderbookEntry(order, *ll);
-            auto newLimit = limitLevels.extract(ll);
-            OrderbookEntry newEntry = OrderbookEntry(order, newLimit.value());
-            if (ll->head_ == NULL)
+            Limit foundLimit = *ll;
+            OrderbookEntry newEntry = OrderbookEntry(order, foundLimit);
+            if (foundLimit.head_ == NULL)
             {
-                auto node = limitLevels.extract(ll);
-                node.value().head_ = &newEntry;
-                node.value().tail_ = &newEntry;
-                limitLevels.insert(std::move(node));
+                foundLimit.head_ = &newEntry;
+                foundLimit.tail_ = &newEntry;
             }
             else
             {
-                OrderbookEntry tailProxy = *ll->tail_;
-                newEntry.Previous = &tailProxy;
-                tailProxy.Next = &newEntry;
+                OrderbookEntry* tailProxy = foundLimit.tail_;
+                newEntry.Previous = tailProxy;
+                tailProxy->Next = &newEntry;
+                foundLimit.tail_ = &newEntry;
             }
-            internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
-
+			internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
         }
         else
         {
-			OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
-			baseLimit.head_ = &newEntry;
-			baseLimit.tail_ = &newEntry;
-			limitLevels.insert(baseLimit);
+            OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
+            limitLevels.insert(baseLimit);
+            baseLimit.head_ = &newEntry;
+            baseLimit.tail_ = &newEntry;
 			internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
-
         }
-    
     }
+  //  template <typename T> 
+  //  void Orderbook::addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook)
+  //  {
 
-    void Orderbook::removeOrder(Orders::CancelOrder co, OrderbookEntry obe, std::map<long, OrderbookEntry> internalBook)
+		//OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
+		//limitLevels.insert(baseLimit);
+		//internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
+  //  }
+
+    void Orderbook::removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook)
     {
         removeOrder(co.getOrderId(), obe, internalBook);
     }
 
-    void Orderbook::removeOrder(long orderId, OrderbookEntry obe, std::map<long, OrderbookEntry> internalBook)
+    void Orderbook::removeOrder(long orderId, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook)
     {
-        if (obe.Previous != NULL) obe.Previous->Next = obe.Next;
-        if (obe.Next != NULL) obe.Next->Previous = obe.Previous;
+        // update obe within list
+        if (obe.Previous != NULL and obe.Next != NULL)
+        {
+            // we are in middle of list
+            obe.Previous->Next = obe.Next;
+            obe.Next->Previous = obe.Previous;
+        }
+        // We are on tail
+        else if (obe.Previous != NULL) obe.Previous->Next = NULL;
+        // We are on head
+        else if (obe.Next != NULL) obe.Next->Previous = NULL;
 
+        // update limit within list
         if (*(obe.getParentLimit().head_) == obe && *(obe.getParentLimit().tail_) == obe)
         {
             obe.getParentLimit().head_ = NULL;
             obe.getParentLimit().tail_ = NULL;
         }
+
         else if (*(obe.getParentLimit().head_) == obe) obe.getParentLimit().head_ = obe.Next;
         else if (*(obe.getParentLimit().tail_) == obe) obe.getParentLimit().tail_ = obe.Previous;
 
