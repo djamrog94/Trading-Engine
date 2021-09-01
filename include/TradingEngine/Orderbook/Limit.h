@@ -23,7 +23,8 @@ namespace TradingEngine::Orderbook {
 	
 	inline bool operator==(const Limit& lhs, const Limit& rhs)
 	{
-		if (lhs.price_ && rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
+		if (lhs.price_ == rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
+		//if (lhs.price_ == rhs.price_) return true;
 		return false;
 	}
 

@@ -23,7 +23,7 @@ namespace TradingEngine::Orders {
 
 	inline bool operator==(const Order& lhs, const Order& rhs)
 	{
-		if (lhs.getOrderId() == rhs.getOrderId()) return true;
+		if (lhs.getOrderId() == rhs.getOrderId() && lhs.getUsername() == rhs.getUsername() && lhs.getSecurityId() == rhs.getSecurityId()) return true;
 		return false;
 	}
 }

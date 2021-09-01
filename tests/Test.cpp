@@ -61,4 +61,20 @@ namespace TradingEngine {
 		BOOST_TEST(bids.size() == 0);
 
 	}
+	BOOST_AUTO_TEST_CASE(orderbookAddTheeBidOrderRemoveOrderMiddle)
+	{
+		const long orderId = 0;
+		Orders::OrderCore oc1 = Orders::OrderCore(orderId, "test1", 1);
+		Orders::OrderCore oc2 = Orders::OrderCore(orderId, "test2", 1);
+		Orders::OrderCore oc3 = Orders::OrderCore(2, "test1", 1);
+		Orders::OrderCore oc4 = Orders::OrderCore(3, "test1", 1);
+		Orderbook::Orderbook ob = Orderbook::Orderbook();
+		ob.addOrder(Orders::Order(oc3, 1, 1001, true));
+		ob.addOrder(Orders::Order(oc1, 5, 1001, true));
+		//ob.removeOrder(Orders::CancelOrder(oc2));
+		ob.addOrder(Orders::Order(oc4, 10, 1001, true));
+		std::vector bids = ob.getBidOrders();
+		BOOST_TEST(bids.size() == 3);
+
+	}
 }

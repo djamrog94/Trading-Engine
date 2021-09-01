@@ -30,7 +30,7 @@ namespace TradingEngine::Orderbook {
 
 	private:
 		
-		template <typename T> static void addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook);
+		template <typename T> static void addOrder(Orders::Order order, Limit& baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook);
 		static void removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
 		static void removeOrder(long orderId, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
 

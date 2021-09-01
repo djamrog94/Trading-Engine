@@ -73,7 +73,12 @@ namespace TradingEngine::Orderbook {
         std::vector<OrderbookEntry> asks;
         for (auto it : askLimits_)
         {
-            asks.push_back(it.getHead());
+            OrderbookEntry* listTraverse = it.head_;
+            while (listTraverse)
+            {
+                asks.push_back(*listTraverse);
+                listTraverse = listTraverse->Next;
+            }
         }
         return asks;
     }
@@ -83,7 +88,12 @@ namespace TradingEngine::Orderbook {
         std::vector<OrderbookEntry> bids;
         for (auto it : bidLimits_)
         {
-            bids.push_back(it.getHead());
+            OrderbookEntry* listTraverse = it.head_;
+            while (listTraverse != NULL)
+            {
+                bids.push_back(*listTraverse);
+                listTraverse = listTraverse->Next;
+            }
         }
         return bids;
     }
@@ -103,7 +113,7 @@ namespace TradingEngine::Orderbook {
     }
 
     template <typename T> 
-    void Orderbook::addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook)
+    void Orderbook::addOrder(Orders::Order order, Limit& baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook)
     {
 
         auto ll = limitLevels.find(baseLimit);
@@ -128,20 +138,16 @@ namespace TradingEngine::Orderbook {
         else
         {
             OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
+			internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), std::move(newEntry)));
+            // need to get memory location of where obe is saved.
+            auto test = internalBook.find(order.getOrderId());
+            baseLimit.head_ = &test->second;
+            baseLimit.tail_ = &test->second;
             limitLevels.insert(baseLimit);
-            baseLimit.head_ = &newEntry;
-            baseLimit.tail_ = &newEntry;
-			internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
+
+            
         }
     }
-  //  template <typename T> 
-  //  void Orderbook::addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook)
-  //  {
-
-		//OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
-		//limitLevels.insert(baseLimit);
-		//internalBook.insert(std::pair<long, OrderbookEntry>(order.getOrderId(), newEntry));
-  //  }
 
     void Orderbook::removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook)
     {
@@ -171,7 +177,7 @@ namespace TradingEngine::Orderbook {
 
         else if (*(obe.getParentLimit().head_) == obe) obe.getParentLimit().head_ = obe.Next;
         else if (*(obe.getParentLimit().tail_) == obe) obe.getParentLimit().tail_ = obe.Previous;
-
+        
         internalBook.erase(orderId);
     }
 }
