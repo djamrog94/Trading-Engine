@@ -5,13 +5,13 @@
 #include <set>
 
 namespace TradingEngine::Orderbook {
-	const auto compareBid = [](Limit x, Limit y)
+	const auto compareBid = [](long x, long y)
 	{
-		return x.price_ > y.price_;
+		return x > y;
 	};
-	const auto compareAsk = [](Limit x, Limit y)
+	const auto compareAsk = [](long x, long y)
 	{
-		return x.price_ < y.price_;
+		return x < y;
 	};
 	class Instrument{};
 	class Orderbook : public RetrievalOrderbook
@@ -23,21 +23,20 @@ namespace TradingEngine::Orderbook {
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
 		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
-		std::vector<OrderbookEntry> getAskOrders();
-		std::vector<OrderbookEntry> getBidOrders();
+		std::vector<Orders::Order> getAskOrders();
+		std::vector<Orders::Order> getBidOrders();
 		Spread getSpread();
 		int getCount();
 
 	private:
 		
-		template <typename T> static void addOrder(Orders::Order order, Limit& baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook);
-		static void removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
-		static void removeOrder(long orderId, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
+		template <typename T> static void addOrder(Orders::Order order, std::map<long, std::vector<Orders::Order*>, T>& limitLevels, std::map<long, Orders::Order>& internalBook);
+		template <typename T> static void removeOrder(Orders::CancelOrder co, std::map<long, std::vector<Orders::Order*>, T>& limitLevel, std::map<long, Orders::Order>& internalBook);
 
 		Instrument instrument_;
-		std::map<long, OrderbookEntry> orders_;
-		std::set<Limit, decltype(compareBid)> bidLimits_;
-		std::set<Limit, decltype(compareAsk)> askLimits_;
+		std::map<long, Orders::Order> orders_;
+		std::map<long, std::vector<Orders::Order*>, decltype(compareBid)> bidLimits_;
+		std::map<long, std::vector<Orders::Order*>, decltype(compareAsk)> askLimits_;
 
 	};
 }
