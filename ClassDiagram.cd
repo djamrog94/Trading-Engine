@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="session" Collapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAIAAgEAHgAAAAAAAAAAgAIAEAAAQAAAA=</HashCode>
+      <FileName>src\TradingEngine\TradingEngine.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="server" Collapsed="true">
+    <Position X="13.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAQACgAAAAAAgAAAEQAAAAAAI=</HashCode>
+      <FileName>src\TradingEngine\TradingEngine.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TcpServer" Collapsed="true">
+    <Position X="11.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\TradingEngine\TradingEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::ActionResultConversion" Collapsed="true">
+    <Position X="10" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\ActionResultConversion.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderbookEntry" Collapsed="true">
+    <Position X="13.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgEAAAAgAAEAAgAAAAAAAAAAUAAAAAACIAACAAAAgAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderbookEntry.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Limit" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>giAJAAAAAAAQAAAAAAAAARAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Limit.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderBookResult" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAIAQAECAAAAUAIAARAGAAMAAIAAAoIEAAAAAAAE=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderBookResult.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderEntryOrderbook">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQAAEAAAAAAAAABAAAAAACAAAAAAAAAAAAAAAFAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderEntryOrderbook.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::RetrievalOrderbook">
+    <Position X="9.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderEntryOrderbook.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::MatchingOrderBook">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\MatchingOrderBook.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Instrument" Collapsed="true">
+    <Position X="13.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Orderbook.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Orderbook">
+    <Position X="9.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAQAAEAAAAAICAAAAAAAAACAQAAAAAAAEIAAABBAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Orderbook.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Spread" Collapsed="true">
+    <Position X="10" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAACQAAAAAAAAAIAAAAAAAAQAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Spread.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderStatuses::CancelOrderStatus" Collapsed="true">
+    <Position X="11.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderStatuses\CancelOrderStatus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderStatuses::NewOrderStatus" Collapsed="true">
+    <Position X="11.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderStatuses\NewOrderStatus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::OrderStatuses::ModifyOrderStatus" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\OrderStatuses\ModifyOrderStatus.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orders::CancelOrder">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orders\CancelOrder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orders::ModifyOrder">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIABBAIAACAAAAAAAAAAABAAAAACQAAAAAAAAgAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orders\ModifyOrder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orders::Order">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBBAAACAAAAAAAEAAAAAEAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orders\Order.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orders::OrderCore">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAAEAAAAAAIAAABAABAEAgAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orders\OrderCore.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Reject::Rejection" Collapsed="true">
+    <Position X="11.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAQgAAAAAAAAAAAAAAAAAAQBAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Reject\Rejection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TradingEngine::Orderbook::Reject::RejectCreator" Collapsed="true">
+    <Position X="10" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Reject\RejectCreator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TradingEngine::Orderbook::MatchOrderBookResult" Collapsed="true">
+    <Position X="12.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\MatchingOrderBook.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="severity_level" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAABAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>include\TradingEngine\Logging\ServerLogger.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TradingEngine::Orderbook::Reject::rejectionReason" Collapsed="true">
+    <Position X="12" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAEAAAAAAAAAAgAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>include\TradingEngine\Orderbook\Reject\Rejection.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

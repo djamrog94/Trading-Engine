@@ -3,37 +3,40 @@
 #include <map>
 #include <vector>
 #include <set>
-namespace TradingEngine::Orderbook {
 
-	auto compare = [](Limit x, Limit y)
+namespace TradingEngine::Orderbook {
+	const auto compareBid = [](long x, long y)
 	{
-		if (x.price_ == y.price_) return 0;
-		else if (x.price_ > y.price_) return 1;
-		else return -1;
+		return x > y;
+	};
+	const auto compareAsk = [](long x, long y)
+	{
+		return x < y;
 	};
 	class Instrument{};
-	class Orderbook : RetrievalOrderbook
+	class Orderbook : public RetrievalOrderbook
 	{
 	public:
+		Orderbook();
 		Orderbook(Instrument instrument);
 		OrderBookResult addOrder(Orders::Order order);
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
 		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
-		std::vector<OrderbookEntry> getAskOrders();
-		std::vector<OrderbookEntry> getBuyOrders();
+		std::vector<Orders::Order> getAskOrders();
+		std::vector<Orders::Order> getBidOrders();
 		Spread getSpread();
-
+		int getCount();
 
 	private:
-		static void addOrder(Orders::Order order, Limit baseLimit, std::set<Limit, decltype(compare)> limitLevels, std::map<long, OrderbookEntry> internalBook);
-		static void removeOrder(Orders::CancelOrder co, OrderbookEntry obe, std::map<long, OrderbookEntry> internalBook);
-		static void removeOrder(long orderId, OrderbookEntry obe, std::map<long, OrderbookEntry> internalBook);
+		
+		template <typename T> static void addOrder(Orders::Order order, std::map<long, std::vector<Orders::Order*>, T>& limitLevels, std::map<long, Orders::Order>& internalBook);
+		template <typename T> static void removeOrder(Orders::CancelOrder co, std::map<long, std::vector<Orders::Order*>, T>& limitLevel, std::map<long, Orders::Order>& internalBook);
 
 		Instrument instrument_;
-		std::map<long, OrderbookEntry> orders_;
-		std::set<Limit, decltype(compare)> bidLimits_;
-		std::set<Limit, decltype(compare)> askLimits_;
+		std::map<long, Orders::Order> orders_;
+		std::map<long, std::vector<Orders::Order*>, decltype(compareBid)> bidLimits_;
+		std::map<long, std::vector<Orders::Order*>, decltype(compareAsk)> askLimits_;
 
 	};
 }

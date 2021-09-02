@@ -6,7 +6,6 @@ namespace TradingEngine::Orderbook {
 	class Limit
 	{
 	public:
-		Limit();
 		Limit(long price);
 		long getPrice();
 		OrderbookEntry getHead();
@@ -18,13 +17,14 @@ namespace TradingEngine::Orderbook {
 		void setTail(OrderbookEntry& tail);
 
 		long price_;
-		OrderbookEntry* head_;
-		OrderbookEntry* tail_;
+		mutable OrderbookEntry* head_;
+		mutable OrderbookEntry* tail_;
 	};
 	
 	inline bool operator==(const Limit& lhs, const Limit& rhs)
 	{
-		if (lhs.price_ && rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
+		if (lhs.price_ == rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
+		//if (lhs.price_ == rhs.price_) return true;
 		return false;
 	}
 

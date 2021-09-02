@@ -1,9 +1,11 @@
 #include "TradingEngine/Orderbook/Limit.h"
 
 namespace TradingEngine::Orderbook {
-	Limit::Limit() = default;
-
-	Limit::Limit(long price) : price_(price) {}
+	Limit::Limit(long price) : price_(price)
+	{
+		head_ = NULL;
+		tail_ = NULL;
+	}
 
 	long Limit::getPrice()
 	{

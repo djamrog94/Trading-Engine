@@ -10,8 +10,5 @@ namespace TradingEngine::Orders {
 		CancelOrder(OrderCore& orderBase);
 
 		CancelOrder(ModifyOrder& modifyOrder);
-
-	private:
-		OrderCore orderBase_;
 	};
 }

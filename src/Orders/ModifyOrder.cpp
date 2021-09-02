@@ -14,11 +14,7 @@ namespace TradingEngine::Orders {
 	{
 		return isBuySide_;
 	}
-	OrderCore ModifyOrder::getCore()
-	{
-		return orderBase_;
-	}
 
 	ModifyOrder::ModifyOrder(OrderCore& orderBase, long price, uint16_t modifyQuantity, bool isBuySide)
-		: orderBase_(orderBase), price_(price), modifyQuantity_(modifyQuantity), isBuySide_(isBuySide) {}
+		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()), price_(price), modifyQuantity_(modifyQuantity), isBuySide_(isBuySide) {}
 }

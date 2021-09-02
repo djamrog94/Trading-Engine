@@ -12,10 +12,13 @@ namespace TradingEngine::Orders {
 		currentQuantity_ -= quantityDelta;
 	}
 
-	Order::Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide)
-		: orderBase_(orderBase), price_(price), initialQuantity_(quantity), currentQuantity_(quantity), isBuySide_(isBuySide) {}
 
+	Order::Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide)
+		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()),
+		price_(price), currentQuantity_(quantity), initialQuantity_(quantity), isBuySide_(isBuySide) {}
+	
+	
 	Order::Order(ModifyOrder& modifyOrder)
-		: orderBase_(modifyOrder.getCore()), price_(modifyOrder.getPrice()), initialQuantity_(modifyOrder.getQuantity()),
+		: OrderCore(modifyOrder.getOrderId(), modifyOrder.getUsername(), modifyOrder.getSecurityId()), price_(modifyOrder.getPrice()), initialQuantity_(modifyOrder.getQuantity()),
 		currentQuantity_(modifyOrder.getQuantity()), isBuySide_(modifyOrder.getIsBuySide()) {}
 }

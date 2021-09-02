@@ -1,6 +1,6 @@
 #pragma once
 #include "TradingEngine/Orders/OrderCore.h"
-#include "TradingEngine/Orders/ModifyOrder.h"
+#include "TradingEngine/Orders/ModifyOrder.h"https://github.com/Tzadiko/Trading-Engine
 
 namespace TradingEngine::Orders {
 	class Order : public OrderCore
@@ -18,14 +18,12 @@ namespace TradingEngine::Orders {
 		uint16_t initialQuantity_;
 		uint16_t currentQuantity_;
 		bool isBuySide_;
-	private:
-		OrderCore orderBase_;
 	};
 
 
 	inline bool operator==(const Order& lhs, const Order& rhs)
 	{
-		if (lhs.orderBase_.getOrderId() && rhs.orderBase_.getOrderId()) return true;
+		if (lhs.getOrderId() == rhs.getOrderId() && lhs.getUsername() == rhs.getUsername() && lhs.getSecurityId() == rhs.getSecurityId()) return true;
 		return false;
 	}
 }

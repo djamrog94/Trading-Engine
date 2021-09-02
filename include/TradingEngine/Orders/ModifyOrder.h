@@ -10,7 +10,6 @@ namespace TradingEngine::Orders {
 		long getPrice();
 		uint16_t getQuantity();
 		bool getIsBuySide();
-		OrderCore getCore();
 
 		//CancelOrder toCancelOrder();
 		//Order toNewOrder();
@@ -18,11 +17,5 @@ namespace TradingEngine::Orders {
 		long price_;
 		uint16_t modifyQuantity_;
 		bool isBuySide_;
-
-	private:
-		
-		OrderCore orderBase_;
-
-
 	};
 }

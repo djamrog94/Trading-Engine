@@ -13,7 +13,7 @@ namespace TradingEngine::Orders {
 
 	int OrderCore::getSecurityId() const
 	{
-		return securityID_;
+		return securityId_;
 	}
 
 	OrderCore OrderCore::createOrderCore(long orderId, std::string username, int securityId)
@@ -22,7 +22,7 @@ namespace TradingEngine::Orders {
 		return newCore;
 	}
 
-	std::string OrderCore::toString()
+	std::string OrderCore::toString() const
 	{
 		return std::string();
 	}
@@ -33,8 +33,8 @@ namespace TradingEngine::Orders {
 			<< oc.getUsername() << " Security=" << oc.getSecurityId() << std::endl;
 	}
 
-	OrderCore::OrderCore(long orderId, std::string username, int securityID)
-		: orderId_(orderId), username_(username), securityID_(securityID) {}
+	OrderCore::OrderCore(long orderId, std::string username, int securityId)
+		: orderId_(orderId), username_(username), securityId_(securityId) {}
 
-	OrderCore::OrderCore() = default;
+	//OrderCore::OrderCore() = default;
 }
