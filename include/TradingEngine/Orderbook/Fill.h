@@ -9,12 +9,6 @@ namespace TradingEngine::Orderbook {
 		Fifo,
 		ProRata
 	};
-
-	const auto compareFill = [](Fill x, Fill y)
-	{
-		return x.executionId_ == y.executionId_;
-	};
-
 	class Fill
 	{
 	public:
@@ -29,5 +23,11 @@ namespace TradingEngine::Orderbook {
 
 
 	};
+
+	const auto compareFill = [](Fill x, Fill y)
+	{
+		return x.executionId_ == y.executionId_;
+	};
+
 }
 
