@@ -75,7 +75,8 @@ namespace TradingEngine {
 		ob.removeOrder(Orders::CancelOrder(oc2));
 		ob.addOrder(Orders::Order(oc4, 10, 1001, true));
 		std::vector bids = ob.getBidOrders();
-		BOOST_TEST(bids.size() == 2);
+		BOOST_TEST(bids.size() == 3);
 
 	}
+	// spread
 }
