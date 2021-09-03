@@ -1,6 +1,0 @@
-C:\Users\brody\source\repos\tcp-server\test\tcp-server.vcxproj.CopyComplete
-C:\Users\brody\source\repos\tcp-server\test\tcp-server.exe
-C:\Users\brody\source\repos\tcp-server\test\boost_filesystem-vc142-mt-x32-1_76.dll
-C:\Users\brody\source\repos\tcp-server\test\boost_log-vc142-mt-x32-1_76.dll
-C:\Users\brody\source\repos\tcp-server\test\boost_thread-vc142-mt-x32-1_76.dll
-C:\Users\brody\source\repos\tcp-server\test\boost_log_setup-vc142-mt-x32-1_76.dll
