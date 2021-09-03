@@ -71,21 +71,21 @@ namespace TradingEngine::Orderbook {
 
 	bool OrderBookResult::hasNewOrderStatuses()
 	{
-		return !newOrderStatuses_.size();
+		return newOrderStatuses_.size();
 	}
 
 	bool OrderBookResult::hasCancelOrderStatuses()
 	{
-		return !cancelOrderStatuses_.size();
+		return cancelOrderStatuses_.size();
 	}
 
 	bool OrderBookResult::hasModifyOrderStatuses()
 	{
-		return !modifyOrderStatuses_.size();
+		return modifyOrderStatuses_.size();
 	}
 
 	bool OrderBookResult::hasRejections()
 	{
-		return !rejections_.size();
+		return rejections_.size();
 	}
 }
