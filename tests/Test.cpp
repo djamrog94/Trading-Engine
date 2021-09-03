@@ -36,6 +36,7 @@ namespace TradingEngine {
 		ob.addOrder(Orders::Order(oc2, 5, 1000, true));
 		ob.addOrder(Orders::Order(oc3, 5, 1001, true));
 		ob.addOrder(Orders::Order(oc1, 5, 1000, false));
+		BOOST_TEST(ob.getBidOrders().size() == 2);
 		BOOST_TEST(ob.getCount() == 3);
 	}
 	BOOST_AUTO_TEST_CASE(orderbookAddOrderRemoveOrder)
@@ -71,10 +72,10 @@ namespace TradingEngine {
 		Orderbook::Orderbook ob = Orderbook::Orderbook();
 		ob.addOrder(Orders::Order(oc3, 1, 1001, true));
 		ob.addOrder(Orders::Order(oc1, 5, 1001, true));
-		//ob.removeOrder(Orders::CancelOrder(oc2));
+		ob.removeOrder(Orders::CancelOrder(oc2));
 		ob.addOrder(Orders::Order(oc4, 10, 1001, true));
 		std::vector bids = ob.getBidOrders();
-		BOOST_TEST(bids.size() == 3);
+		BOOST_TEST(bids.size() == 2);
 
 	}
 }

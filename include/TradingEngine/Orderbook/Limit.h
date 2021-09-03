@@ -1,5 +1,6 @@
 #pragma once
 #include "TradingEngine/Orderbook/OrderbookEntry.h"
+#include <memory>
 
 namespace TradingEngine::Orderbook {
 	class OrderbookEntry;
@@ -13,12 +14,12 @@ namespace TradingEngine::Orderbook {
 		friend bool operator==(const Limit& lhs, const Limit& rhs);
 
 		void setPrice(long price);
-		void setHead(OrderbookEntry& head);
-		void setTail(OrderbookEntry& tail);
+/*		void setHead(OrderbookEntry& head);
+		void setTail(OrderbookEntry& tail)*/;
 
 		long price_;
-		mutable OrderbookEntry* head_;
-		mutable OrderbookEntry* tail_;
+		mutable std::shared_ptr<OrderbookEntry> head_;
+		mutable std::shared_ptr<OrderbookEntry> tail_;
 	};
 	
 	inline bool operator==(const Limit& lhs, const Limit& rhs)

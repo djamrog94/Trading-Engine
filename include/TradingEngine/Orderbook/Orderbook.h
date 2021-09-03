@@ -3,15 +3,15 @@
 #include <map>
 #include <vector>
 #include <set>
-
+#include <memory>
 namespace TradingEngine::Orderbook {
-	const auto compareBid = [](Limit x, Limit y)
+	const auto compareBid = [](std::shared_ptr<Limit> x, std::shared_ptr<Limit> y)
 	{
-		return x.price_ > y.price_;
+		return (*x).price_ > (*y).price_;
 	};
-	const auto compareAsk = [](Limit x, Limit y)
+	const auto compareAsk = [](std::shared_ptr<Limit> x, std::shared_ptr<Limit> y)
 	{
-		return x.price_ < y.price_;
+		return (*x).price_ < (*y).price_;
 	};
 	class Instrument{};
 	class Orderbook : public RetrievalOrderbook
@@ -30,14 +30,14 @@ namespace TradingEngine::Orderbook {
 
 	private:
 		
-		template <typename T> static void addOrder(Orders::Order order, Limit& baseLimit, std::set<Limit, T>& limitLevels, std::map<long, OrderbookEntry>& internalBook);
-		static void removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
-		static void removeOrder(long orderId, OrderbookEntry& obe, std::map<long, OrderbookEntry>& internalBook);
+		template <typename T> static void addOrder(Orders::Order order, std::shared_ptr<Limit> baseLimit, std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(long orderId, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 
 		Instrument instrument_;
-		std::map<long, OrderbookEntry> orders_;
-		std::set<Limit, decltype(compareBid)> bidLimits_;
-		std::set<Limit, decltype(compareAsk)> askLimits_;
+		std::map<long, std::shared_ptr<OrderbookEntry>> orders_;
+		std::set<std::shared_ptr<Limit>, decltype(compareBid)> bidLimits_;
+		std::set<std::shared_ptr<Limit>, decltype(compareAsk)> askLimits_;
 
 	};
 }

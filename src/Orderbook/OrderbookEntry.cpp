@@ -2,14 +2,14 @@
 
 namespace TradingEngine::Orderbook {
 
-	OrderbookEntry::OrderbookEntry(Orders::Order currentOrder, Limit& parentLimit)
+	OrderbookEntry::OrderbookEntry(Orders::Order currentOrder, std::shared_ptr<Limit> parentLimit)
 		: currentOrder_(currentOrder), parentLimit_(parentLimit), Next(NULL), Previous(NULL) {}
 
 	Orders::Order OrderbookEntry::getCurrent()
 	{
 		return currentOrder_;
 	}
-	Limit& OrderbookEntry::getParentLimit()
+	std::shared_ptr<Limit> OrderbookEntry::getParentLimit()
 	{
 		return parentLimit_;
 	}
@@ -22,12 +22,12 @@ namespace TradingEngine::Orderbook {
 	{
 		return *Previous;
 	}
-	void OrderbookEntry::setNext(OrderbookEntry& next)
-	{
-		Next = &next;
-	}
-	void OrderbookEntry::setPrevious(OrderbookEntry& prev)
-	{
-		Previous = &prev;
-	}
+	//void OrderbookEntry::setNext(OrderbookEntry& next)
+	//{
+	//	Next = &next;
+	//}
+	//void OrderbookEntry::setPrevious(OrderbookEntry& prev)
+	//{
+	//	Previous = &prev;
+	//}
 }
