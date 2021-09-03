@@ -3,15 +3,15 @@
 #include <map>
 #include <vector>
 #include <set>
-
+#include <memory>
 namespace TradingEngine::Orderbook {
-	const auto compareBid = [](long x, long y)
+	const auto compareBid = [](std::shared_ptr<Limit> x, std::shared_ptr<Limit> y)
 	{
-		return x > y;
+		return (*x).price_ > (*y).price_;
 	};
-	const auto compareAsk = [](long x, long y)
+	const auto compareAsk = [](std::shared_ptr<Limit> x, std::shared_ptr<Limit> y)
 	{
-		return x < y;
+		return (*x).price_ < (*y).price_;
 	};
 	class Instrument{};
 	class Orderbook : public RetrievalOrderbook
@@ -23,20 +23,21 @@ namespace TradingEngine::Orderbook {
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
 		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
-		std::vector<Orders::Order> getAskOrders();
-		std::vector<Orders::Order> getBidOrders();
+		std::vector<OrderbookEntry> getAskOrders();
+		std::vector<OrderbookEntry> getBidOrders();
 		Spread getSpread();
 		int getCount();
 
 	private:
 		
-		template <typename T> static void addOrder(Orders::Order order, std::map<long, std::vector<Orders::Order*>, T>& limitLevels, std::map<long, Orders::Order>& internalBook);
-		template <typename T> static void removeOrder(Orders::CancelOrder co, std::map<long, std::vector<Orders::Order*>, T>& limitLevel, std::map<long, Orders::Order>& internalBook);
+		template <typename T> static void addOrder(Orders::Order order, std::shared_ptr<Limit> baseLimit, std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 
 		Instrument instrument_;
-		std::map<long, Orders::Order> orders_;
-		std::map<long, std::vector<Orders::Order*>, decltype(compareBid)> bidLimits_;
-		std::map<long, std::vector<Orders::Order*>, decltype(compareAsk)> askLimits_;
+		std::map<long, std::shared_ptr<OrderbookEntry>> orders_;
+		std::set<std::shared_ptr<Limit>, decltype(compareBid)> bidLimits_;
+		std::set<std::shared_ptr<Limit>, decltype(compareAsk)> askLimits_;
 
 	};
 }

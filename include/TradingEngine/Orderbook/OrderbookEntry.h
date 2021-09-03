@@ -1,29 +1,30 @@
 #pragma once
 #include "TradingEngine/Orderbook/Limit.h"
 #include "TradingEngine/Orders/Order.h"
+#include <memory>
 
 namespace TradingEngine::Orderbook {
 	class Limit;
 	class OrderbookEntry
 	{
 	public:
-		OrderbookEntry(Orders::Order currentOrder, Limit& parentLimit);
+		OrderbookEntry(Orders::Order currentOrder, std::shared_ptr<Limit> parentLimit);
 		Orders::Order getCurrent();
-		Limit& getParentLimit();
+		std::shared_ptr<Limit> getParentLimit();
 		friend bool operator==(const OrderbookEntry& lhs, const OrderbookEntry& rhs);
 
 		OrderbookEntry getNext();
 	    OrderbookEntry getPrevious();
 
-		void setNext(OrderbookEntry& next);
-		void setPrevious(OrderbookEntry& prev);
+		//void setNext(OrderbookEntry& next);
+		//void setPrevious(OrderbookEntry& prev);
 
-		OrderbookEntry* Next;
-		OrderbookEntry* Previous;
+		std::shared_ptr<OrderbookEntry> Next;
+		std::shared_ptr<OrderbookEntry> Previous;
 
 	private:
 		Orders::Order currentOrder_;
-		Limit& parentLimit_;
+		std::shared_ptr<Limit> parentLimit_;
 	};
 
 	inline bool operator==(const OrderbookEntry& lhs, const OrderbookEntry& rhs)
