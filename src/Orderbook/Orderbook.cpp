@@ -25,8 +25,8 @@ namespace TradingEngine::Orderbook {
         // if order exists
         if (mod != orders_.end())
         {
-            OrderbookEntry obe = *(mod->second);
-            if (modifyOrder.isBuySide_ != obe.getCurrent().isBuySide_)
+            std::shared_ptr<OrderbookEntry> obe = mod->second;
+            if (modifyOrder.isBuySide_ != (*obe).getCurrent().isBuySide_)
             {
                 ar.AddRejection(Reject::RejectCreator::generateModyifyRejection(modifyOrder, Reject::rejectionReason::AttemptingToModifyWrongSide));
                 return ar;
@@ -34,8 +34,8 @@ namespace TradingEngine::Orderbook {
             Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
             removeOrder(co, obe, orders_);
             Orders::Order ord = Orders::Order(modifyOrder);
-            if (modifyOrder.isBuySide_) addOrder(ord, obe.getParentLimit(), bidLimits_, orders_);
-            else addOrder(ord, obe.getParentLimit(), askLimits_, orders_);
+            if (modifyOrder.isBuySide_) addOrder(ord, (*obe).getParentLimit(), bidLimits_, orders_);
+            else addOrder(ord, (*obe).getParentLimit(), askLimits_, orders_);
         }
         else
         {
@@ -54,7 +54,7 @@ namespace TradingEngine::Orderbook {
         // if order exists
         if (can != orders_.end())
         {
-            OrderbookEntry obe = *(can->second);
+            std::shared_ptr<OrderbookEntry> obe = can->second;
             removeOrder(cancelOrder, obe, orders_);
             ar.AddCancelOrderStatus(ActionResultConversion::generateCancelOrderStatus(cancelOrder));
         }
@@ -155,34 +155,35 @@ namespace TradingEngine::Orderbook {
         }
     }
 
-    void Orderbook::removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
+    void Orderbook::removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
     {
         removeOrder(co.getOrderId(), obe, internalBook);
     }
 
-    void Orderbook::removeOrder(long orderId, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
+    void Orderbook::removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
     {
         // update obe within list
-        if (obe.Previous != NULL and obe.Next != NULL)
+        if ((*obe).Previous != NULL and (*obe).Next != NULL)
         {
             // we are in middle of list
-            obe.Previous->Next = obe.Next;
-            obe.Next->Previous = obe.Previous;
+            (*obe).Previous->Next = (*obe).Next;
+            (*obe).Next->Previous = (*obe).Previous;
         }
         // We are on tail
-        else if (obe.Previous != NULL) obe.Previous->Next = NULL;
+        else if ((*obe).Previous != NULL) (*obe).Previous->Next = NULL;
         // We are on head
-        else if (obe.Next != NULL) obe.Next->Previous = NULL;
+        else if ((*obe).Next != NULL) (*obe).Next->Previous = NULL;
 
         // update limit within list
-        if (*((*obe.getParentLimit()).head_) == obe && *((*obe.getParentLimit()).tail_) == obe)
+        //(*(*obe).getParentLimit()).head_
+        if ( (*(*obe).getParentLimit()).head_ == obe && (*(*obe).getParentLimit()).tail_ == obe )
         {
-            (*obe.getParentLimit()).head_ = NULL;
-            (*obe.getParentLimit()).tail_ = NULL;
+            (*(*obe).getParentLimit()).head_ = NULL;
+            (*(*obe).getParentLimit()).tail_ = NULL;
         }
 
-        else if (*((*obe.getParentLimit()).head_) == obe) (*obe.getParentLimit()).head_ = obe.Next;
-        else if (*((*obe.getParentLimit()).tail_) == obe) (*obe.getParentLimit()).tail_ = obe.Previous;
+        else if ( (*(*obe).getParentLimit()).head_ == obe ) (*(*obe).getParentLimit()).head_ = (*obe).Next;
+        else if ( (*(*obe).getParentLimit()).tail_ == obe) (*(*obe).getParentLimit()).tail_ = (*obe).Previous;
         
         internalBook.erase(orderId);
     }

@@ -31,8 +31,8 @@ namespace TradingEngine::Orderbook {
 	private:
 		
 		template <typename T> static void addOrder(Orders::Order order, std::shared_ptr<Limit> baseLimit, std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
-		static void removeOrder(Orders::CancelOrder co, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
-		static void removeOrder(long orderId, OrderbookEntry& obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		static void removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 
 		Instrument instrument_;
 		std::map<long, std::shared_ptr<OrderbookEntry>> orders_;
