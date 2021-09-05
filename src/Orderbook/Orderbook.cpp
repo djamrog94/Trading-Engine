@@ -3,9 +3,9 @@
 #include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 namespace TradingEngine::Orderbook {
 
-    Orderbook::Orderbook() = default;
+    Orderbook::Orderbook() : RetrievalOrderbook() {};
     Orderbook::Orderbook(Instrument instrument)
-        : instrument_(instrument) {}
+        : RetrievalOrderbook(), instrument_(instrument) {}
 
     OrderBookResult Orderbook::addOrder(Orders::Order order)
     {
@@ -67,30 +67,30 @@ namespace TradingEngine::Orderbook {
     }
 
 
-    std::vector<OrderbookEntry> Orderbook::getAskOrders()
+    std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getAskOrders()
     {
-        std::vector<OrderbookEntry> asks;
+        std::vector<std::shared_ptr<OrderbookEntry>> asks;
         for (auto it : askLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
             while (listTraverse)
             {
-                asks.push_back(*listTraverse);
+                asks.push_back(listTraverse);
                 listTraverse = listTraverse->Next;
             }
         }
         return asks;
     }
 
-    std::vector<OrderbookEntry> Orderbook::getBidOrders()
+    std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getBidOrders()
     {
-        std::vector<OrderbookEntry> bids;
+        std::vector<std::shared_ptr<OrderbookEntry>> bids;
         for (auto it : bidLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
             while (listTraverse != NULL)
             {
-                bids.push_back(*listTraverse);
+                bids.push_back(listTraverse);
                 listTraverse = listTraverse->Next;
             }
         }

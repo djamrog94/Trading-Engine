@@ -94,7 +94,7 @@ namespace TradingEngine {
 		ob.addOrder(Orders::Order(oc4, 5, 1001, true));
 		std::vector bids = ob.getBidOrders();
 		BOOST_TEST(bids.size() == 2);
-		BOOST_TEST(bids[0].getCurrent().price_ >= bids[1].getCurrent().price_);
+		BOOST_TEST((*bids[0]).getCurrent().price_ >= (*bids[1]).getCurrent().price_);
 
 	}
 	BOOST_AUTO_TEST_CASE(orderbookAddTheeAskOrderRemoveOrderMiddle)
@@ -111,7 +111,7 @@ namespace TradingEngine {
 		ob.addOrder(Orders::Order(oc4, 10, 1001, false));
 		std::vector asks = ob.getAskOrders();
 		BOOST_TEST(asks.size() == 2);
-		BOOST_TEST(asks[0].getCurrent().price_ <= asks[1].getCurrent().price_);
+		BOOST_TEST((*asks[0]).getCurrent().price_ <= (*asks[1]).getCurrent().price_);
 
 	}
 	BOOST_AUTO_TEST_CASE(orderbookAddAskOrderSamePriceRemoveMiddle)
@@ -128,7 +128,7 @@ namespace TradingEngine {
 		ob.addOrder(Orders::Order(oc4, 5, 1001, false));
 		std::vector asks = ob.getAskOrders();
 		BOOST_TEST(asks.size() == 2);
-		BOOST_TEST(asks[0].getCurrent().price_ <= asks[1].getCurrent().price_);
+		BOOST_TEST((*asks[0]).getCurrent().price_ <= (*asks[1]).getCurrent().price_);
 
 	}
 
@@ -143,7 +143,7 @@ namespace TradingEngine {
 		Orderbook::OrderBookResult res = ob.changeOrder(Orders::ModifyOrder(oc1, 1000, modifyOrderQuantity, true));
 		std::vector bids = ob.getBidOrders();
 		BOOST_TEST(bids.size() == 1);
-		BOOST_TEST(modifyOrderQuantity == bids[0].getCurrent().currentQuantity_);
+		BOOST_TEST(modifyOrderQuantity == (*bids[0]).getCurrent().currentQuantity_);
 		BOOST_TEST(res.hasModifyOrderStatuses() == true);
 
 	}
