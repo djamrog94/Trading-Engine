@@ -257,6 +257,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Orderbook\OrderIdGenerator.cpp" />
+    <ClCompile Include="src\Orderbook\Fill.cpp" />
+    <ClCompile Include="src\Orderbook\MatchResult.cpp" />
     <ClCompile Include="src\Orderbook\Orderbook.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">false</ExcludedFromBuild>
@@ -273,6 +276,8 @@
     <ClCompile Include="src\Orderbook\Reject\RejectCreator.cpp" />
     <ClCompile Include="src\Orderbook\Reject\Rejection.cpp" />
     <ClCompile Include="src\Orderbook\Spread.cpp" />
+    <ClCompile Include="src\Orderbook\Trade.cpp" />
+    <ClCompile Include="src\Orderbook\TradeUtilities.cpp" />
     <ClCompile Include="src\Orders\CancelOrder.cpp" />
     <ClCompile Include="src\Orders\ModifyOrder.cpp" />
     <ClCompile Include="src\Orders\Order.cpp" />
@@ -292,7 +297,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Fill.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchResult.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderStatuses\CancelOrderStatus.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Trade.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\TradeUtilities.h" />
     <ClInclude Include="include\TradingEngine\Orders\CancelOrder.h" />
     <ClInclude Include="include\TradingEngine\Orders\ModifyOrder.h" />
     <ClInclude Include="include\TradingEngine\Orders\Order.h" />
@@ -313,6 +322,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">

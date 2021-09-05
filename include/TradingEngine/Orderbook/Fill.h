@@ -1,9 +1,8 @@
 #pragma once
 #include "TradingEngine/Orders/Order.h"
 #include <string>
-
 namespace TradingEngine::Orderbook {
-	const enum FillAllocationAlgorithm
+	const enum class FillAllocationAlgorithm
 	{
 		Unknown,
 		Fifo,
@@ -12,7 +11,11 @@ namespace TradingEngine::Orderbook {
 	class Fill
 	{
 	public:
-		Fill(Orders::OrderCore& orderBase);
+		//Fill(Orders::OrderCore& orderBase);
+		Fill(Orders::OrderCore& orderBase, FillAllocationAlgorithm fillAlocAlgo, uint16_t quantity, long fillId, bool isCompleteFill, std::string executionId);
+
+		std::string getFillExecutionId();
+
 		Orders::OrderCore orderBase_;
 		bool isCompleteFill_;
 		uint16_t fillQuantity_;
