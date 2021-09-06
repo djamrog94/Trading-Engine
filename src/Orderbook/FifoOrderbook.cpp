@@ -1,7 +1,7 @@
 #include "TradingEngine/Orderbook/FifoOrderbook.h"
 
 namespace TradingEngine::Orderbook {
-	FifoOrderbook::FifoOrderbook(RetrievalOrderbook ob)
+	FifoOrderbook::FifoOrderbook(Orderbook& ob)
 		: AbstractOrderbook(ob, MatchingAlgorithm::FifoMatchingAlgorithm::getMatchingAlgorithm()) {}
 	
 	MatchOrderBookResult FifoOrderbook::match()
@@ -12,7 +12,8 @@ namespace TradingEngine::Orderbook {
 		std::vector<std::shared_ptr<OrderbookEntry>> asks = orderbook_.getAskOrders();
 		MatchResult matchResult = matchingAlgorithm_.match(bids, asks);
 		std::set<Fill, decltype(compareFill)> fullyFilledOrders;
-		std::for_each(matchResult.getFills().begin(), matchResult.getFills().end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.insert(f); });
+		std::vector<Fill> fills = matchResult.getFills();
+		std::for_each(fills.begin(), fills.end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.insert(f); });
 		
 		for (Fill fill : fullyFilledOrders)
 		{

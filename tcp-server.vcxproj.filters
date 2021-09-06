@@ -105,9 +105,6 @@
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tests\FifoOrderbookTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">

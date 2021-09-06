@@ -21,9 +21,9 @@ namespace TradingEngine::Orderbook {
 
 		std::shared_ptr<OrderbookEntry> Next;
 		std::shared_ptr<OrderbookEntry> Previous;
+		Orders::Order currentOrder_;
 
 	private:
-		Orders::Order currentOrder_;
 		std::shared_ptr<Limit> parentLimit_;
 	};
 

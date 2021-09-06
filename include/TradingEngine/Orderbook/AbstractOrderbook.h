@@ -1,14 +1,16 @@
 #pragma once
 #include "TradingEngine/Orderbook/MatchingOrderbook.h"
 #include "TradingEngine/Orderbook/OrderEntryOrderbook.h"
+#include "TradingEngine/Orderbook/Orderbook.h"
 #include "TradingEngine/Orderbook/MatchingAlgorithm/MatchingAlgorithm.h"
+#include "TradingEngine/Orderbook/MatchingAlgorithm/FifoMatchingAlgorithm.h"
 #include <mutex>
 
 namespace TradingEngine::Orderbook {
 	class AbstractOrderbook : public MatchingOrderbook
 	{
 	public:
-		AbstractOrderbook(RetrievalOrderbook orderbook, MatchingAlgorithm::MatchingAlgorithm matchingAlgorithm);
+		AbstractOrderbook(Orderbook orderbook, MatchingAlgorithm::FifoMatchingAlgorithm matchingAlgorithm);
 		int getCount();
 		OrderBookResult addOrder(Orders::Order order);
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
@@ -18,8 +20,8 @@ namespace TradingEngine::Orderbook {
 		virtual MatchOrderBookResult match() { return MatchOrderBookResult(); };
 
 	protected:
-		MatchingAlgorithm::MatchingAlgorithm matchingAlgorithm_;
-		RetrievalOrderbook orderbook_;
+		MatchingAlgorithm::FifoMatchingAlgorithm matchingAlgorithm_;
+		Orderbook orderbook_;
 		std::mutex ob_mutex;
 	};
 }

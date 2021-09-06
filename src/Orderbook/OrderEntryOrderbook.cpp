@@ -1,6 +1,7 @@
 #include "TradingEngine/Orderbook/OrderEntryOrderbook.h"
 namespace TradingEngine::Orderbook {
-   /* OrderBookResult OrderEntryOrderbook::addOrder(Orders::Order order)
+    OrderEntryOrderbook::OrderEntryOrderbook() = default;
+    /* OrderBookResult OrderEntryOrderbook::addOrder(Orders::Order order)
     {
         return OrderBookResult();
     }

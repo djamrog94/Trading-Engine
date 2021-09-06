@@ -2,9 +2,9 @@
 
 namespace TradingEngine::Orderbook::MatchingAlgorithm {
 	FifoMatchingAlgorithm::FifoMatchingAlgorithm() = default;
-	MatchingAlgorithm FifoMatchingAlgorithm::getMatchingAlgorithm()
+	FifoMatchingAlgorithm FifoMatchingAlgorithm::getMatchingAlgorithm()
 	{
-		MatchingAlgorithm newMatchingAlgorithm = FifoMatchingAlgorithm();
+		FifoMatchingAlgorithm newMatchingAlgorithm = FifoMatchingAlgorithm();
 		return newMatchingAlgorithm;
 	}
 	MatchResult FifoMatchingAlgorithm::match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks)
@@ -12,10 +12,10 @@ namespace TradingEngine::Orderbook::MatchingAlgorithm {
 		MatchResult matchResult = MatchResult();
 		if (bids.size() == 0 || asks.size() == 0)
 			return matchResult;
+		//OrderbookEntry orderToMatchBid1 = *(*bids.begin());
 		//OrderbookEntry orderToMatchBid = *(*bids.begin());
-		//OrderbookEntry orderToMatchBid = *(*bids.begin());
-		std::shared_ptr<OrderbookEntry> orderToMatchAsk = *asks.begin();
-		std::shared_ptr<OrderbookEntry> orderToMatchBid = *bids.begin();
+		std::shared_ptr<OrderbookEntry> orderToMatchAsk = *(asks.begin());
+		std::shared_ptr<OrderbookEntry> orderToMatchBid = *(bids.begin());
 
 		do
 		{
@@ -36,8 +36,8 @@ namespace TradingEngine::Orderbook::MatchingAlgorithm {
 				continue;
 			}
 			uint16_t fillQuantity = std::min(remainingQuantityBid, remainingQuantityAsk);
-			(*orderToMatchBid).getCurrent().DecreaseQuantity(fillQuantity);
-			(*orderToMatchAsk).getCurrent().DecreaseQuantity(fillQuantity);
+			(*orderToMatchBid).currentOrder_.DecreaseQuantity(fillQuantity);
+			(*orderToMatchAsk).currentOrder_.DecreaseQuantity(fillQuantity);
 
 			Orderbook::TradeAndFills tradesAndFills = TradeUtilities::createTradeAndFills((*orderToMatchBid).getCurrent(), (*orderToMatchAsk).getCurrent(), fillQuantity, FillAllocationAlgorithm::Fifo);
 			matchResult.addFill(tradesAndFills.firstFill);

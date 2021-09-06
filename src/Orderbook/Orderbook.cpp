@@ -70,6 +70,7 @@ namespace TradingEngine::Orderbook {
     std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getAskOrders()
     {
         std::vector<std::shared_ptr<OrderbookEntry>> asks;
+        asks.reserve(askLimits_.size());
         for (auto it : askLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
@@ -85,13 +86,14 @@ namespace TradingEngine::Orderbook {
     std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getBidOrders()
     {
         std::vector<std::shared_ptr<OrderbookEntry>> bids;
+        bids.reserve(bidLimits_.size());
         for (auto it : bidLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
             while (listTraverse != NULL)
             {
                 bids.push_back(listTraverse);
-                listTraverse = listTraverse->Next;
+             cd /n/   listTraverse = listTraverse->Next;
             }
         }
         return bids;

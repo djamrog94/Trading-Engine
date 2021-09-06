@@ -35,9 +35,9 @@ namespace TradingEngine::Orderbook {
 		TradeUtilities(TradeUtilities const&) = delete;
 		void operator=(TradeUtilities const&) = delete;
 
-		static TradeAndFills createTradeAndFills(Orders::Order bidOrder, Orders::Order askOrder, uint16_t fillQuantity, Orderbook::FillAllocationAlgorithm fillAlocAlgo);
+		static TradeAndFills createTradeAndFills(Orders::Order bidOrder, Orders::Order askOrder, uint16_t fillQuantity, FillAllocationAlgorithm fillAlocAlgo);
 		static FillIds getFillIds(long tradeNumber);
-		static std::string getTradeExecutionId(time_t tradeTime, long tradeNumber);
+		//static std::string getTradeExecutionId(time_t tradeTime, long tradeNumber);
 	private:
 		TradeUtilities();
 		long tradeNumber_;

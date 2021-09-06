@@ -21,7 +21,7 @@ namespace TradingEngine::Orderbook {
 		uint16_t fillQuantity_;
 		long fillId_;
 		std::string executionId_;
-		std::string fillExecutionId_;
+		//std::string fillExecutionId_;
 		FillAllocationAlgorithm fillAllocationAlgorithm_;
 
 

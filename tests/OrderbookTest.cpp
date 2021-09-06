@@ -4,6 +4,7 @@
 #include "TradingEngine/Orderbook/Orderbook.h"
 #include "TradingEngine/Orderbook/Trade.h"
 #include "TradingEngine/Orderbook/OrderIdGenerator.h"
+#include "TradingEngine/Orderbook/FifoOrderbook.h"
 
 namespace TradingEngine {
 	Orders::OrderCore oc = Orders::OrderCore(0, "test", 0);
@@ -185,4 +186,23 @@ namespace TradingEngine {
 		BOOST_TEST(second == first + 1);
 
 	}
+	BOOST_AUTO_TEST_CASE(testFifoOrderbook)
+	{
+		Orders::OrderCore oc1 = Orders::OrderCore(1, "test1", 1);
+		Orders::OrderCore oc2 = Orders::OrderCore(2, "test1", 1);
+		Orderbook::Orderbook ob = Orderbook::Orderbook();
+		Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob);
+		// price, quantity
+		Orders::Order askOrder = Orders::Order(oc1, 10000, 10, false);
+		Orders::Order buyOrder = Orders::Order(oc2, 10001, 5, true);
+
+		fifoMatcher.addOrder(askOrder);
+		fifoMatcher.addOrder(buyOrder);
+		auto results = fifoMatcher.match();
+
+
+		BOOST_TEST(1 == 1);
+
+	}
+
 }

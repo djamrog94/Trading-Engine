@@ -4,10 +4,13 @@
 #include "TradingEngine/Orderbook/AbstractOrderbook.h"
 #include "TradingEngine/Orderbook/MatchingAlgorithm/FifoMatchingAlgorithm.h"
 #include <set>
+#include "TradingEngine/Orderbook/Orderbook.h"
+
 namespace TradingEngine::Orderbook {
 	class FifoOrderbook : public AbstractOrderbook
 	{
-		FifoOrderbook(RetrievalOrderbook ob);
+	public:
+		FifoOrderbook(Orderbook& ob);
 		MatchOrderBookResult match();
 
 	};

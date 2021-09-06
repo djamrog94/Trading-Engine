@@ -298,7 +298,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="tests\FifoOrderbookTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h" />

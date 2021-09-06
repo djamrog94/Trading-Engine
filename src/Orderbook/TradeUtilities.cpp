@@ -26,8 +26,8 @@ namespace TradingEngine::Orderbook {
 		FillIds fillids{2 * tradeNumber, 2*tradeNumber +1};
 		return fillids;
 	}
-	std::string TradeUtilities::getTradeExecutionId(time_t tradeTime, long tradeNumber)
-	{
-		return std::string();
-	}
+	//std::string TradeUtilities::getTradeExecutionId(time_t tradeTime, long tradeNumber)
+	//{
+	//	return std::string();
+	//}
 }
