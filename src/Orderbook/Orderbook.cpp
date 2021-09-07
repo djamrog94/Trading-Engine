@@ -93,7 +93,7 @@ namespace TradingEngine::Orderbook {
             while (listTraverse != NULL)
             {
                 bids.push_back(listTraverse);
-             cd /n/   listTraverse = listTraverse->Next;
+                listTraverse = listTraverse->Next;
             }
         }
         return bids;

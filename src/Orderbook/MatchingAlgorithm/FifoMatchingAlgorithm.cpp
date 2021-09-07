@@ -1,10 +1,11 @@
 #include "TradingEngine/Orderbook/MatchingAlgorithm/FifoMatchingAlgorithm.h"
+#include "TradingEngine/Orderbook/MatchingAlgorithm/MatchingAlgorithm.h"
 
 namespace TradingEngine::Orderbook::MatchingAlgorithm {
 	FifoMatchingAlgorithm::FifoMatchingAlgorithm() = default;
-	FifoMatchingAlgorithm FifoMatchingAlgorithm::getMatchingAlgorithm()
+	MatchingAlgorithm FifoMatchingAlgorithm::getMatchingAlgorithm()
 	{
-		FifoMatchingAlgorithm newMatchingAlgorithm = FifoMatchingAlgorithm();
+		MatchingAlgorithm newMatchingAlgorithm = FifoMatchingAlgorithm();
 		return newMatchingAlgorithm;
 	}
 	MatchResult FifoMatchingAlgorithm::match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks)
@@ -12,8 +13,6 @@ namespace TradingEngine::Orderbook::MatchingAlgorithm {
 		MatchResult matchResult = MatchResult();
 		if (bids.size() == 0 || asks.size() == 0)
 			return matchResult;
-		//OrderbookEntry orderToMatchBid1 = *(*bids.begin());
-		//OrderbookEntry orderToMatchBid = *(*bids.begin());
 		std::shared_ptr<OrderbookEntry> orderToMatchAsk = *(asks.begin());
 		std::shared_ptr<OrderbookEntry> orderToMatchBid = *(bids.begin());
 

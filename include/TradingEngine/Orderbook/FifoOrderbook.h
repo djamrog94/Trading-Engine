@@ -10,7 +10,7 @@ namespace TradingEngine::Orderbook {
 	class FifoOrderbook : public AbstractOrderbook
 	{
 	public:
-		FifoOrderbook(Orderbook& ob);
+		FifoOrderbook(RetrievalOrderbook* ob, MatchingAlgorithm::MatchingAlgorithm* test);
 		MatchOrderBookResult match();
 
 	};

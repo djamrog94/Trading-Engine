@@ -10,7 +10,7 @@ namespace TradingEngine::Orderbook {
 	class AbstractOrderbook : public MatchingOrderbook
 	{
 	public:
-		AbstractOrderbook(Orderbook orderbook, MatchingAlgorithm::FifoMatchingAlgorithm matchingAlgorithm);
+		AbstractOrderbook(RetrievalOrderbook* orderbook, MatchingAlgorithm::MatchingAlgorithm* matchingAlgorithm);
 		int getCount();
 		OrderBookResult addOrder(Orders::Order order);
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
@@ -19,9 +19,9 @@ namespace TradingEngine::Orderbook {
 		Spread getSpread();
 		virtual MatchOrderBookResult match() { return MatchOrderBookResult(); };
 
-	protected:
-		MatchingAlgorithm::FifoMatchingAlgorithm matchingAlgorithm_;
-		Orderbook orderbook_;
+	//protected:
+		MatchingAlgorithm::MatchingAlgorithm* matchingAlgorithm_;
+		RetrievalOrderbook* orderbook_;
 		std::mutex ob_mutex;
 	};
 }

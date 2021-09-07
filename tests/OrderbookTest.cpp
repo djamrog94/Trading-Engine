@@ -190,12 +190,12 @@ namespace TradingEngine {
 	{
 		Orders::OrderCore oc1 = Orders::OrderCore(1, "test1", 1);
 		Orders::OrderCore oc2 = Orders::OrderCore(2, "test1", 1);
-		Orderbook::Orderbook ob = Orderbook::Orderbook();
-		Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob);
+		Orderbook::Orderbook* ob = new Orderbook::Orderbook();
+		Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm* test = new Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm();
+		Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob, test);
 		// price, quantity
 		Orders::Order askOrder = Orders::Order(oc1, 10000, 10, false);
 		Orders::Order buyOrder = Orders::Order(oc2, 10001, 5, true);
-
 		fifoMatcher.addOrder(askOrder);
 		fifoMatcher.addOrder(buyOrder);
 		auto results = fifoMatcher.match();

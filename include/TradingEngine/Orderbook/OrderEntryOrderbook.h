@@ -12,27 +12,19 @@ namespace TradingEngine::Orderbook {
 	{
 	public:
 		OrderEntryOrderbook();
-		//virtual OrderBookResult addOrder(Orders::Order order) { return OrderBookResult(); };
-		//virtual OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder) { return OrderBookResult(); };
-		//virtual OrderBookResult removeOrder(Orders::CancelOrder cancelOrder) { return OrderBookResult(); };
-		//virtual Spread getSpread() { return Spread(0,0); };
-		//virtual int getCount() { return 0; };
-		//virtual bool containsOrder(long orderId) { return 0; };
-		 OrderBookResult addOrder(Orders::Order order) { return OrderBookResult(); };
-		 OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder) { return OrderBookResult(); };
-		 OrderBookResult removeOrder(Orders::CancelOrder cancelOrder) { return OrderBookResult(); };
-		 Spread getSpread() { return Spread(0,0); };
-		 int getCount() { return 0; };
-		 bool containsOrder(long orderId) { return 0; };
+		virtual OrderBookResult addOrder(Orders::Order order) { return OrderBookResult(); };
+		virtual OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder) { return OrderBookResult(); };
+		virtual OrderBookResult removeOrder(Orders::CancelOrder cancelOrder) { return OrderBookResult(); };
+		virtual Spread getSpread() { return Spread(0,0); };
+		virtual int getCount() { return 0; };
+		virtual bool containsOrder(long orderId) { return 0; };
 	};
 
 	class RetrievalOrderbook : public OrderEntryOrderbook
 	{
 	public:
-		//virtual std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
-		//virtual std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
-		 std::vector<std::shared_ptr<OrderbookEntry>> getBidOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
-		 std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
+		virtual std::vector<std::shared_ptr<OrderbookEntry>> getBidOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
+		virtual std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders() { return std::vector<std::shared_ptr<OrderbookEntry>>(); };
 	};
 
 }
