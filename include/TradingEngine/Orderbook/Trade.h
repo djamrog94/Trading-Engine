@@ -3,7 +3,7 @@
 #include <string>
 #include <time.h>
 #include <boost/date_time.hpp>
-
+#include "TradingEngine/Orderbook/TradeIdGenerator.h"
 namespace TradingEngine::Orderbook {
 	class Trade
 	{
@@ -15,7 +15,6 @@ namespace TradingEngine::Orderbook {
 		std::string executionId_;
 		int getTradeNumber();
 	private:
-		static int getID();
 		const int currentTradeNumber_;
 
 	};

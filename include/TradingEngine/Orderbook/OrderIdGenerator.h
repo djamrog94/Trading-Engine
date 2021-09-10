@@ -15,9 +15,6 @@ namespace TradingEngine::Orderbook
 
 	protected:
 		OrderIdGenerator();
-
-
 	};
-
 }
 
