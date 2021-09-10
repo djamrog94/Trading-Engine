@@ -261,6 +261,7 @@ namespace TradingEngine {
 		const long askOrderOrderId = 0;
 		const long buyOrderOrderId = 1;
 		const long buySecondOrderOrderId = 2;
+		const long askPrice = 10000;
 		Orders::OrderCore ao = Orders::OrderCore(askOrderOrderId, "test1", 1);
 		Orders::OrderCore bo = Orders::OrderCore(buyOrderOrderId, "test1", 1);
 		Orders::OrderCore bo2 = Orders::OrderCore(buySecondOrderOrderId, "test1", 1);
@@ -268,7 +269,7 @@ namespace TradingEngine {
 		Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm* test = new Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm();
 		Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob, test);
 		// price, quantity
-		Orders::Order askOrder = Orders::Order(ao, 10000, 100, false);
+		Orders::Order askOrder = Orders::Order(ao, askPrice, 100, false);
 		Orders::Order buyOrder = Orders::Order(bo, 10001, 15, true);
 		Orders::Order buyOrder2 = Orders::Order(bo2, 10001, 15, true);
 		fifoMatcher.addOrder(askOrder);
@@ -283,7 +284,46 @@ namespace TradingEngine {
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(askOrderOrderId) == true);
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buyOrderOrderId) == false);
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buySecondOrderOrderId) == false);
-		BOOST_TEST(10000 == spread.getAsk().value());
+		BOOST_TEST(askPrice == spread.getAsk().value());
+		BOOST_TEST(NULL == spread.getBid().value());
+
+
+	}
+	BOOST_AUTO_TEST_CASE(FifoOrderbookFourOrdersPerfectMatch)
+	{
+		const long askOrderOrderId = 0;
+		const long asksecondOrderOrderId = 1;
+		const long buyOrderOrderId = 2;
+		const long buySecondOrderOrderId = 3;
+		const long askPrice = 10000;
+		const long bidPrice = 10001;
+		Orders::OrderCore ao = Orders::OrderCore(askOrderOrderId, "test1", 1);
+		Orders::OrderCore ao2 = Orders::OrderCore(asksecondOrderOrderId, "test1", 1);
+		Orders::OrderCore bo = Orders::OrderCore(buyOrderOrderId, "test1", 1);
+		Orders::OrderCore bo2 = Orders::OrderCore(buySecondOrderOrderId, "test1", 1);
+		Orderbook::Orderbook* ob = new Orderbook::Orderbook();
+		Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm* test = new Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm();
+		Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob, test);
+		// price, quantity
+		Orders::Order askOrder = Orders::Order(ao, askPrice, 10, false);
+		Orders::Order askOrder2 = Orders::Order(ao2, askPrice, 20, false);
+		Orders::Order buyOrder = Orders::Order(bo, bidPrice, 15, true);
+		Orders::Order buyOrder2 = Orders::Order(bo2, bidPrice, 15, true);
+		fifoMatcher.addOrder(askOrder);
+		fifoMatcher.addOrder(askOrder2);
+		fifoMatcher.addOrder(buyOrder);
+		fifoMatcher.addOrder(buyOrder2);
+		auto results = fifoMatcher.match();
+		auto spread = fifoMatcher.getSpread();
+
+		BOOST_TEST(results.MatchResult.getFills().size() == 6);
+		BOOST_TEST(results.MatchResult.getTrades().size() == 3);
+		BOOST_TEST(results.OrderBookResult.hasCancelOrderStatuses() == true);
+		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(askOrderOrderId) == false);
+		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(asksecondOrderOrderId) == false);
+		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buyOrderOrderId) == false);
+		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buySecondOrderOrderId) == false);
+		BOOST_TEST(NULL == spread.getAsk().value());
 		BOOST_TEST(NULL == spread.getBid().value());
 
 

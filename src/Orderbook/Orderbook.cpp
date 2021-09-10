@@ -195,21 +195,17 @@ namespace TradingEngine::Orderbook {
         //(*(*obe).getParentLimit()).head_
         if ( (*(*obe).getParentLimit()).head_ == obe && (*(*obe).getParentLimit()).tail_ == obe )
         {
-            if (obe->getCurrent().isBuySide_)
-            {
-                limitLevels.erase((*obe).getParentLimit());
-            }
-            else
-            {
-
-            }
-            //(*(*obe).getParentLimit()).head_ = NULL;
-            //(*(*obe).getParentLimit()).tail_ = NULL;
+            (*(*obe).getParentLimit()).head_ = NULL;
+            (*(*obe).getParentLimit()).tail_ = NULL;
         }
 
         else if ( (*(*obe).getParentLimit()).head_ == obe ) (*(*obe).getParentLimit()).head_ = (*obe).Next;
         else if ( (*(*obe).getParentLimit()).tail_ == obe) (*(*obe).getParentLimit()).tail_ = (*obe).Previous;
         
+        auto test = limitLevels.find((*obe).getParentLimit());
+
+        if ((*obe).Previous == NULL and (*obe).Next == NULL)
+            limitLevels.erase((*obe).getParentLimit());
         internalBook.erase(orderId);
     }
 }
