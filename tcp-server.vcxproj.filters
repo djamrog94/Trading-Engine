@@ -105,6 +105,9 @@
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Orderbook\TradeIdGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
@@ -192,6 +195,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\TradeIdGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
