@@ -11,9 +11,10 @@ namespace TradingEngine::Orderbook {
 		std::vector<std::shared_ptr<OrderbookEntry>> bids = orderbook_->getBidOrders();
 		std::vector<std::shared_ptr<OrderbookEntry>> asks = orderbook_->getAskOrders();
 		MatchResult matchResult = matchingAlgorithm_->match(bids, asks);
-		std::set<Fill, decltype(compareFill)> fullyFilledOrders;
+		//std::set<Fill, decltype(compareFill)> fullyFilledOrders;
+		std::vector<Fill> fullyFilledOrders;
 		std::vector<Fill> fills = matchResult.getFills();
-		std::for_each(fills.begin(), fills.end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.insert(f); });
+		std::for_each(fills.begin(), fills.end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.push_back(f); });
 		
 		for (Fill fill : fullyFilledOrders)
 		{
