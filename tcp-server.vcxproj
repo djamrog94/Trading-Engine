@@ -257,11 +257,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp" />
+    <ClCompile Include="src\Orderbook\FifoOrderbook.cpp" />
+    <ClCompile Include="src\Orderbook\MatchingAlgorithm\MatchingAlgorithm.cpp" />
+    <ClCompile Include="src\Orderbook\AbstractOrderbook.cpp" />
+    <ClCompile Include="src\Orderbook\OrderIdGenerator.cpp" />
+    <ClCompile Include="src\Orderbook\Fill.cpp" />
+    <ClCompile Include="src\Orderbook\MatchResult.cpp" />
     <ClCompile Include="src\Orderbook\Orderbook.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\MatchingOrderBook.cpp" />
+    <ClCompile Include="src\Orderbook\MatchingOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\OrderEntryOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\OrderBookResult.cpp" />
     <ClCompile Include="src\Orderbook\ActionResultConversion.cpp" />
@@ -273,6 +280,8 @@
     <ClCompile Include="src\Orderbook\Reject\RejectCreator.cpp" />
     <ClCompile Include="src\Orderbook\Reject\Rejection.cpp" />
     <ClCompile Include="src\Orderbook\Spread.cpp" />
+    <ClCompile Include="src\Orderbook\Trade.cpp" />
+    <ClCompile Include="src\Orderbook\TradeUtilities.cpp" />
     <ClCompile Include="src\Orders\CancelOrder.cpp" />
     <ClCompile Include="src\Orders\ModifyOrder.cpp" />
     <ClCompile Include="src\Orders\Order.cpp" />
@@ -285,14 +294,21 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="tests\Test.cpp">
+    <ClCompile Include="tests\OrderbookTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\FifoOrderbook.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\AbstractOrderbook.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Fill.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchResult.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderStatuses\CancelOrderStatus.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\Trade.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\TradeUtilities.h" />
     <ClInclude Include="include\TradingEngine\Orders\CancelOrder.h" />
     <ClInclude Include="include\TradingEngine\Orders\ModifyOrder.h" />
     <ClInclude Include="include\TradingEngine\Orders\Order.h" />
@@ -308,11 +324,13 @@
     <ClInclude Include="include\TradingEngine\Orderbook\OrderbookEntry.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderBookResult.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderEntryOrderbook.h" />
-    <ClInclude Include="include\TradingEngine\Orderbook\MatchingOrderBook.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchingOrderbook.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\Orderbook.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\MatchingAlgorithm.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
@@ -323,6 +341,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="tcp-server.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

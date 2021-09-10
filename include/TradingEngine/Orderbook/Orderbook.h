@@ -23,16 +23,16 @@ namespace TradingEngine::Orderbook {
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
 		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
-		std::vector<OrderbookEntry> getAskOrders();
-		std::vector<OrderbookEntry> getBidOrders();
+		std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders();
+		std::vector<std::shared_ptr<OrderbookEntry>> getBidOrders();
 		Spread getSpread();
 		int getCount();
 
 	private:
 		
 		template <typename T> static void addOrder(Orders::Order order, std::shared_ptr<Limit> baseLimit, std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
-		static void removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
-		static void removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		template <typename T> static void removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
+		template <typename T> static void removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 
 		Instrument instrument_;
 		std::map<long, std::shared_ptr<OrderbookEntry>> orders_;

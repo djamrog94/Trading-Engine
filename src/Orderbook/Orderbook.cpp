@@ -3,9 +3,9 @@
 #include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 namespace TradingEngine::Orderbook {
 
-    Orderbook::Orderbook() = default;
+    Orderbook::Orderbook() : RetrievalOrderbook() {};
     Orderbook::Orderbook(Instrument instrument)
-        : instrument_(instrument) {}
+        : RetrievalOrderbook(), instrument_(instrument) {}
 
     OrderBookResult Orderbook::addOrder(Orders::Order order)
     {
@@ -32,7 +32,14 @@ namespace TradingEngine::Orderbook {
                 return ar;
             }
             Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
-            removeOrder(co, obe, orders_);
+            if (obe->currentOrder_.isBuySide_)
+            {
+                removeOrder(co, obe, bidLimits_, orders_);
+            }
+            else
+            {
+                removeOrder(co, obe, askLimits_, orders_);
+            }
             Orders::Order ord = Orders::Order(modifyOrder);
             if (modifyOrder.isBuySide_) addOrder(ord, (*obe).getParentLimit(), bidLimits_, orders_);
             else addOrder(ord, (*obe).getParentLimit(), askLimits_, orders_);
@@ -55,7 +62,14 @@ namespace TradingEngine::Orderbook {
         if (can != orders_.end())
         {
             std::shared_ptr<OrderbookEntry> obe = can->second;
-            removeOrder(cancelOrder, obe, orders_);
+            if (obe->currentOrder_.isBuySide_)
+            {
+                removeOrder(cancelOrder, obe, bidLimits_, orders_);
+            }
+            else
+            {
+                removeOrder(cancelOrder, obe, askLimits_, orders_);
+            }
             ar.AddCancelOrderStatus(ActionResultConversion::generateCancelOrderStatus(cancelOrder));
         }
         return ar;
@@ -67,30 +81,32 @@ namespace TradingEngine::Orderbook {
     }
 
 
-    std::vector<OrderbookEntry> Orderbook::getAskOrders()
+    std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getAskOrders()
     {
-        std::vector<OrderbookEntry> asks;
+        std::vector<std::shared_ptr<OrderbookEntry>> asks;
+        asks.reserve(askLimits_.size());
         for (auto it : askLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
             while (listTraverse)
             {
-                asks.push_back(*listTraverse);
+                asks.push_back(listTraverse);
                 listTraverse = listTraverse->Next;
             }
         }
         return asks;
     }
 
-    std::vector<OrderbookEntry> Orderbook::getBidOrders()
+    std::vector<std::shared_ptr<OrderbookEntry>> Orderbook::getBidOrders()
     {
-        std::vector<OrderbookEntry> bids;
+        std::vector<std::shared_ptr<OrderbookEntry>> bids;
+        bids.reserve(bidLimits_.size());
         for (auto it : bidLimits_)
         {
             std::shared_ptr<OrderbookEntry> listTraverse = (*it).head_;
             while (listTraverse != NULL)
             {
-                bids.push_back(*listTraverse);
+                bids.push_back(listTraverse);
                 listTraverse = listTraverse->Next;
             }
         }
@@ -154,13 +170,14 @@ namespace TradingEngine::Orderbook {
             
         }
     }
-
-    void Orderbook::removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
+    template <typename T>
+    void Orderbook::removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
     {
-        removeOrder(co.getOrderId(), obe, internalBook);
+        removeOrder(co.getOrderId(), obe, limitLevels, internalBook);
     }
 
-    void Orderbook::removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
+    template <typename T>
+    void Orderbook::removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook)
     {
         // update obe within list
         if ((*obe).Previous != NULL and (*obe).Next != NULL)
@@ -185,6 +202,10 @@ namespace TradingEngine::Orderbook {
         else if ( (*(*obe).getParentLimit()).head_ == obe ) (*(*obe).getParentLimit()).head_ = (*obe).Next;
         else if ( (*(*obe).getParentLimit()).tail_ == obe) (*(*obe).getParentLimit()).tail_ = (*obe).Previous;
         
+        auto test = limitLevels.find((*obe).getParentLimit());
+
+        if ((*obe).Previous == NULL and (*obe).Next == NULL)
+            limitLevels.erase((*obe).getParentLimit());
         internalBook.erase(orderId);
     }
 }

@@ -5,7 +5,7 @@ namespace TradingEngine::Orderbook {
 	class Spread
 	{
 	public:
-		Spread(optional<long> bid, optional<long> ask);
+		Spread(optional<long> ask, optional<long> bid);
 
 		optional<long> getBid();
 		optional<long> getAsk();
