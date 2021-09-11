@@ -63,9 +63,6 @@
     <ClCompile Include="src\Orderbook\ActionResultConversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderBookResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Orderbook\OrderEntryOrderbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -162,9 +159,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderBookResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\OrderEntryOrderbook.h">
