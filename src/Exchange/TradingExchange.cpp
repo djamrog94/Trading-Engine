@@ -6,7 +6,7 @@ namespace TradingEngine::Exchange {
         exchangeName_ = config_["TradingExxchangeConfiguration"]["ExchangeName"].as<std::string>();
         //auto securities = config["TradingExxchangeConfiguration"]["Securities"].as<seq>();
         Instrument::Security sec = Instrument::Security(0, "FB", Orderbook::FillAllocationAlgorithm::Fifo);
-        orderbooks_.emplace(0, Orderbook::OrderbookFactory::createOrderbook(sec));
+        //orderbooks_.emplace(0, Orderbook::OrderbookFactory::createOrderbook(sec));
     }
 
 

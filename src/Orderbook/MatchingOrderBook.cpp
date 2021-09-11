@@ -8,20 +8,20 @@ namespace TradingEngine::Orderbook {
 		return orderbook_->getCount();
 	}
 
-	OrderBookResult MatchingOrderbook::addOrder(Orders::Order order)
+	void MatchingOrderbook::addOrder(Orders::Order order)
 	{
 		std::lock_guard<std::mutex> guard(ob_mutex);
-		return orderbook_->addOrder(order);
+		orderbook_->addOrder(order);
 	}
-	OrderBookResult MatchingOrderbook::changeOrder(Orders::ModifyOrder modifyOrder)
+	void MatchingOrderbook::changeOrder(Orders::ModifyOrder modifyOrder)
 	{
 		std::lock_guard<std::mutex> guard(ob_mutex);
-		return orderbook_->changeOrder(modifyOrder);
+		orderbook_->changeOrder(modifyOrder);
 	}
-	OrderBookResult MatchingOrderbook::removeOrder(Orders::CancelOrder cancelOrder)
+	void MatchingOrderbook::removeOrder(Orders::CancelOrder cancelOrder)
 	{
 		std::lock_guard<std::mutex> guard(ob_mutex);
-		return orderbook_->removeOrder(cancelOrder);
+		orderbook_->removeOrder(cancelOrder);
 	}
 	bool MatchingOrderbook::containsOrder(long orderId)
 	{
@@ -32,5 +32,22 @@ namespace TradingEngine::Orderbook {
 	{
 		std::lock_guard<std::mutex> guard(ob_mutex);
 		return orderbook_->getSpread();
+	}
+	MatchResult MatchingOrderbook::match()
+	{
+		std::lock_guard<std::mutex> guard(ob_mutex);
+		std::vector<std::shared_ptr<OrderbookEntry>> bids = orderbook_->getBidOrders();
+		std::vector<std::shared_ptr<OrderbookEntry>> asks = orderbook_->getAskOrders();
+		MatchResult matchResult = matchingAlgorithm_->match(bids, asks);
+		//std::set<Fill, decltype(compareFill)> fullyFilledOrders;
+		std::vector<Fill> fullyFilledOrders;
+		std::vector<Fill> fills = matchResult.getFills();
+		std::for_each(fills.begin(), fills.end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.push_back(f); });
+		
+		for (Fill fill : fullyFilledOrders)
+		{
+			orderbook_->removeOrder(Orders::CancelOrder(fill.orderBase_));
+		}
+		return matchResult;
 	}
 }

@@ -262,7 +262,6 @@
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp" />
     <ClCompile Include="src\Orderbook\FifoOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\MatchingAlgorithm.cpp" />
-    <ClCompile Include="src\Orderbook\AbstractOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\OrderIdGenerator.cpp" />
     <ClCompile Include="src\Orderbook\Fill.cpp" />
     <ClCompile Include="src\Orderbook\MatchResult.cpp" />
@@ -306,7 +305,6 @@
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\FifoOrderbook.h" />
-    <ClInclude Include="include\TradingEngine\Orderbook\AbstractOrderbook.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\Fill.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\MatchResult.h" />

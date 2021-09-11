@@ -7,19 +7,15 @@ namespace TradingEngine::Orderbook {
     Orderbook::Orderbook(Instrument::Security security)
         : RetrievalOrderbook(), security_(security) {}
 
-    OrderBookResult Orderbook::addOrder(Orders::Order order)
+    void Orderbook::addOrder(Orders::Order order)
     {
-        OrderBookResult ar = OrderBookResult();
         std::shared_ptr<Limit> baseLimit = std::make_shared<Limit>(order.price_);
         if (order.isBuySide_) addOrder(order, baseLimit, bidLimits_, orders_);
         else addOrder(order, baseLimit, askLimits_, orders_);
-        ar.AddNewOrderStatus(ActionResultConversion::generateNewOrderStatus(order));
-        return OrderBookResult();
     }
 
-    OrderBookResult Orderbook::changeOrder(Orders::ModifyOrder modifyOrder)
+    void Orderbook::changeOrder(Orders::ModifyOrder modifyOrder)
     {
-        OrderBookResult ar = OrderBookResult();
         auto mod = orders_.find(modifyOrder.getOrderId());
         
         // if order exists
@@ -28,8 +24,6 @@ namespace TradingEngine::Orderbook {
             std::shared_ptr<OrderbookEntry> obe = mod->second;
             if (modifyOrder.isBuySide_ != (*obe).getCurrent().isBuySide_)
             {
-                ar.AddRejection(Reject::RejectCreator::generateModyifyRejection(modifyOrder, Reject::rejectionReason::AttemptingToModifyWrongSide));
-                return ar;
             }
             Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
             if (obe->currentOrder_.isBuySide_)
@@ -44,18 +38,10 @@ namespace TradingEngine::Orderbook {
             if (modifyOrder.isBuySide_) addOrder(ord, (*obe).getParentLimit(), bidLimits_, orders_);
             else addOrder(ord, (*obe).getParentLimit(), askLimits_, orders_);
         }
-        else
-        {
-            ar.AddRejection(Reject::RejectCreator::generateModyifyRejection(modifyOrder, Reject::rejectionReason::OrderNotFound));
-            return ar;
-        }
-        ar.AddModifyOrderStatus(ActionResultConversion::generateModifyOrderStatus(modifyOrder));
-        return ar;
     }
 
-    OrderBookResult Orderbook::removeOrder(Orders::CancelOrder cancelOrder)
+    void Orderbook::removeOrder(Orders::CancelOrder cancelOrder)
     {
-        OrderBookResult ar = OrderBookResult();
         auto can = orders_.find(cancelOrder.getOrderId());
         
         // if order exists
@@ -70,9 +56,7 @@ namespace TradingEngine::Orderbook {
             {
                 removeOrder(cancelOrder, obe, askLimits_, orders_);
             }
-            ar.AddCancelOrderStatus(ActionResultConversion::generateCancelOrderStatus(cancelOrder));
         }
-        return ar;
     }
 
     bool Orderbook::containsOrder(long orderId)

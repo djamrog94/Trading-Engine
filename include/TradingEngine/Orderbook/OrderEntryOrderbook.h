@@ -12,9 +12,9 @@ namespace TradingEngine::Orderbook {
 	{
 	public:
 		OrderEntryOrderbook();
-		virtual OrderBookResult addOrder(Orders::Order order) { return OrderBookResult(); };
-		virtual OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder) { return OrderBookResult(); };
-		virtual OrderBookResult removeOrder(Orders::CancelOrder cancelOrder) { return OrderBookResult(); };
+		virtual void addOrder(Orders::Order order) {};
+		virtual void changeOrder(Orders::ModifyOrder modifyOrder) {};
+		virtual void removeOrder(Orders::CancelOrder cancelOrder) {};
 		virtual Spread getSpread() { return Spread(0,0); };
 		virtual int getCount() { return 0; };
 		virtual bool containsOrder(long orderId) { return 0; };

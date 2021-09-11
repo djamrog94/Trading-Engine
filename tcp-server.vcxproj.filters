@@ -93,9 +93,6 @@
     <ClCompile Include="src\Orderbook\OrderIdGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\AbstractOrderbook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\MatchingAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -192,9 +189,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\AbstractOrderbook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\MatchingAlgorithm.h">

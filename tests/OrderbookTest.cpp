@@ -319,9 +319,8 @@ namespace TradingEngine {
 		auto results = fifoMatcher.match();
 		auto spread = fifoMatcher.getSpread();
 
-		BOOST_TEST(results.MatchResult.getFills().size() == 6);
-		BOOST_TEST(results.MatchResult.getTrades().size() == 3);
-		BOOST_TEST(results.OrderBookResult.hasCancelOrderStatuses() == true);
+		BOOST_TEST(results.getFills().size() == 6);
+		BOOST_TEST(results.getTrades().size() == 3);
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(askOrderOrderId) == false);
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(asksecondOrderOrderId) == false);
 		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buyOrderOrderId) == false);

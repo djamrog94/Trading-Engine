@@ -19,9 +19,9 @@ namespace TradingEngine::Orderbook {
 	public:
 		//Orderbook();
 		Orderbook(Instrument::Security security);
-		OrderBookResult addOrder(Orders::Order order);
-		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
-		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
+		void addOrder(Orders::Order order);
+		void changeOrder(Orders::ModifyOrder modifyOrder);
+		void removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
 		std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders();
 		std::vector<std::shared_ptr<OrderbookEntry>> getBidOrders();
