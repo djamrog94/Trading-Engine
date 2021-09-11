@@ -3,9 +3,9 @@
 #include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 namespace TradingEngine::Orderbook {
 
-    Orderbook::Orderbook() : RetrievalOrderbook() {};
-    Orderbook::Orderbook(Instrument instrument)
-        : RetrievalOrderbook(), instrument_(instrument) {}
+    //Orderbook::Orderbook() : RetrievalOrderbook() {};
+    Orderbook::Orderbook(Instrument::Security security)
+        : RetrievalOrderbook(), security_(security) {}
 
     OrderBookResult Orderbook::addOrder(Orders::Order order)
     {

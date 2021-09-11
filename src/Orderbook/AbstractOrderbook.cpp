@@ -2,7 +2,7 @@
 #include "TradingEngine/Orderbook/Orderbook.h"
 
 namespace TradingEngine::Orderbook {
-	AbstractOrderbook::AbstractOrderbook(RetrievalOrderbook* orderbook, MatchingAlgorithm::MatchingAlgorithm* matchingAlgorithm)
+	AbstractOrderbook::AbstractOrderbook(std::unique_ptr<RetrievalOrderbook> orderbook, std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> matchingAlgorithm)
 		: orderbook_(orderbook), matchingAlgorithm_(matchingAlgorithm) {}
 
 	int AbstractOrderbook::getCount()

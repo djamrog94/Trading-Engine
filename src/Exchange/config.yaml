@@ -1,0 +1,11 @@
+"TradingExchangeConfiguration": {
+        "ExchangeId": 0,
+        "ExchangeName": "BRDY",
+        "Securities": [
+            {
+                "SecurityId": 0,
+                "Symbol": "FB",
+                "AllocationAlgorithm": "Fifo"
+            }
+        ]
+}

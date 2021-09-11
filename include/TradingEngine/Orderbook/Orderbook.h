@@ -1,5 +1,6 @@
 #pragma once
 #include "TradingEngine/Orderbook/OrderEntryOrderbook.h"
+#include "TradingEngine/Instrument/Security.h"
 #include <map>
 #include <vector>
 #include <set>
@@ -13,12 +14,11 @@ namespace TradingEngine::Orderbook {
 	{
 		return (*x).price_ < (*y).price_;
 	};
-	class Instrument{};
 	class Orderbook : public RetrievalOrderbook
 	{
 	public:
-		Orderbook();
-		Orderbook(Instrument instrument);
+		//Orderbook();
+		Orderbook(Instrument::Security security);
 		OrderBookResult addOrder(Orders::Order order);
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
 		OrderBookResult removeOrder(Orders::CancelOrder cancelOrder);
@@ -34,7 +34,7 @@ namespace TradingEngine::Orderbook {
 		template <typename T> static void removeOrder(Orders::CancelOrder co, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 		template <typename T> static void removeOrder(long orderId, std::shared_ptr<OrderbookEntry> obe,std::set<std::shared_ptr<Limit>, T>& limitLevels, std::map<long, std::shared_ptr<OrderbookEntry>>& internalBook);
 
-		Instrument instrument_;
+		Instrument::Security security_;
 		std::map<long, std::shared_ptr<OrderbookEntry>> orders_;
 		std::set<std::shared_ptr<Limit>, decltype(compareBid)> bidLimits_;
 		std::set<std::shared_ptr<Limit>, decltype(compareAsk)> askLimits_;

@@ -1,8 +1,8 @@
 #include "TradingEngine/Orderbook/FifoOrderbook.h"
 
 namespace TradingEngine::Orderbook {
-	FifoOrderbook::FifoOrderbook(RetrievalOrderbook* ob, MatchingAlgorithm::MatchingAlgorithm* test)
-		: AbstractOrderbook(ob, test) {};
+	FifoOrderbook::FifoOrderbook(std::unique_ptr<RetrievalOrderbook> ob, std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> test)
+		: AbstractOrderbook(std::move(ob), std::move(test)) {};
 	
 	MatchOrderBookResult FifoOrderbook::match()
 	{

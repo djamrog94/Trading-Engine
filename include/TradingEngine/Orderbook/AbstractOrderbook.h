@@ -5,12 +5,12 @@
 #include "TradingEngine/Orderbook/MatchingAlgorithm/MatchingAlgorithm.h"
 #include "TradingEngine/Orderbook/MatchingAlgorithm/FifoMatchingAlgorithm.h"
 #include <mutex>
-
+#include <memory>
 namespace TradingEngine::Orderbook {
 	class AbstractOrderbook : public MatchingOrderbook
 	{
 	public:
-		AbstractOrderbook(RetrievalOrderbook* orderbook, MatchingAlgorithm::MatchingAlgorithm* matchingAlgorithm);
+		AbstractOrderbook(std::unique_ptr<RetrievalOrderbook> orderbook, std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> matchingAlgorithm);
 		int getCount();
 		OrderBookResult addOrder(Orders::Order order);
 		OrderBookResult changeOrder(Orders::ModifyOrder modifyOrder);
@@ -20,8 +20,8 @@ namespace TradingEngine::Orderbook {
 		virtual MatchOrderBookResult match() { return MatchOrderBookResult(); };
 
 	//protected:
-		MatchingAlgorithm::MatchingAlgorithm* matchingAlgorithm_;
-		RetrievalOrderbook* orderbook_;
+		std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> matchingAlgorithm_;
+		std::unique_ptr<RetrievalOrderbook> orderbook_;
 		std::mutex ob_mutex;
 	};
 }

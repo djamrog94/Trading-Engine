@@ -1,6 +1,7 @@
 #pragma once
 #include "TradingEngine/Orders/Order.h"
 #include <string>
+
 namespace TradingEngine::Orderbook {
 	const enum class FillAllocationAlgorithm
 	{
@@ -23,8 +24,6 @@ namespace TradingEngine::Orderbook {
 		std::string executionId_;
 		//std::string fillExecutionId_;
 		FillAllocationAlgorithm fillAllocationAlgorithm_;
-
-
 	};
 
 	const auto compareFill = [](Fill x, Fill y)

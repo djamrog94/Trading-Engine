@@ -257,6 +257,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Orderbook\OrderbookFactory.cpp" />
+    <ClCompile Include="src\Instrument\Security.cpp" />
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp" />
     <ClCompile Include="src\Orderbook\FifoOrderbook.cpp" />
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\MatchingAlgorithm.cpp" />
@@ -299,6 +301,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Orderbook\TradeIdGenerator.cpp" />
+    <ClCompile Include="src\Exchange\TradingExchange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h" />
@@ -332,6 +335,7 @@
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\MatchingAlgorithm.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderbookFactory.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
     <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
@@ -340,12 +344,15 @@
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\Spread.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\TradeIdGenerator.h" />
+    <ClInclude Include="include\TradingEngine\Exchange\TradingExchange.h" />
+    <ClInclude Include="include\TradingEngine\Instrument\Security.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="tcp-server.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="src\Exchange\config.yaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
