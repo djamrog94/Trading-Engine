@@ -25,7 +25,8 @@ namespace TradingEngine::Orderbook {
             if (modifyOrder.isBuySide_ != (*obe).getCurrent().isBuySide_)
             {
             }
-            Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
+            //Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
+            Orders::CancelOrder co = modifyOrder.toCancelOrder();
             if (obe->currentOrder_.isBuySide_)
             {
                 removeOrder(co, obe, bidLimits_, orders_);
@@ -34,7 +35,8 @@ namespace TradingEngine::Orderbook {
             {
                 removeOrder(co, obe, askLimits_, orders_);
             }
-            Orders::Order ord = Orders::Order(modifyOrder);
+            //Orders::Order ord = Orders::Order(modifyOrder);
+            Orders::Order ord = modifyOrder.toNewOrder();
             if (modifyOrder.isBuySide_) addOrder(ord, (*obe).getParentLimit(), bidLimits_, orders_);
             else addOrder(ord, (*obe).getParentLimit(), askLimits_, orders_);
         }
@@ -62,6 +64,40 @@ namespace TradingEngine::Orderbook {
     bool Orderbook::containsOrder(long orderId)
     {
         return orders_.contains(orderId);
+    }
+
+    Orders::ModifyOrderType Orderbook::getModifyOrderType(Orders::ModifyOrder modifyOrder)
+    {
+        auto it = orders_.find(modifyOrder.getOrderId());
+        OrderbookEntry obe = *(*it).second;
+        if (it != orders_.end())
+        {
+            if (obe.currentOrder_.price_ != modifyOrder.price_ && obe.currentOrder_.initialQuantity_ != modifyOrder.modifyQuantity_)
+            {
+                return Orders::ModifyOrderType::PriceAndQuantity;
+            }
+            else if (obe.currentOrder_.price_ != modifyOrder.price_)
+            {
+                return Orders::ModifyOrderType::Price;
+            }
+            else if (obe.currentOrder_.initialQuantity_ != modifyOrder.modifyQuantity_)
+            {
+                return Orders::ModifyOrderType::Quantity;
+            }
+            else
+            {
+                return Orders::ModifyOrderType::NoChange;
+            }
+        }
+        return Orders::ModifyOrderType::Unknown;
+    }
+
+    std::shared_ptr<OrderbookEntry> Orderbook::tryGetOrder(long orderId)
+    {
+        auto it = orders_.find(orderId);
+        if (it != orders_.end())
+            return it->second;
+        return std::shared_ptr<OrderbookEntry>();
     }
 
 

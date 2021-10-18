@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TradingEngine\TradingEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Logging\ServerLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -111,11 +108,17 @@
     <ClCompile Include="src\Orderbook\OrderbookFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Orderbook\RejectGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\ExchangeResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -206,6 +209,12 @@
     <ClInclude Include="include\TradingEngine\Orderbook\OrderbookFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\RejectGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\ExchangeResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="tcp-server.rc">
@@ -215,5 +224,6 @@
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
     <None Include="src\Exchange\config.yaml" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
 </Project>

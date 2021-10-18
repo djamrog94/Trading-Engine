@@ -2,10 +2,11 @@
 #include "TradingEngine/Orderbook/OrderEntryOrderbook.h"
 #include "TradingEngine/Orderbook/MatchResult.h"
 #include "TradingEngine/Orderbook/MatchingAlgorithm/MatchingAlgorithm.h"
+#include "TradingEngine/Orders/ModifyOrder.h"
 #include <memory>
 #include <mutex>
 namespace TradingEngine::Orderbook {
-	class MatchingOrderbook : OrderEntryOrderbook
+	class MatchingOrderbook : public OrderEntryOrderbook
 	{
 	public:
 
@@ -14,6 +15,8 @@ namespace TradingEngine::Orderbook {
 		void addOrder(Orders::Order order);
 		void changeOrder(Orders::ModifyOrder modifyOrder);
 		void removeOrder(Orders::CancelOrder cancelOrder);
+		Orders::ModifyOrderType getModifyOrderType(Orders::ModifyOrder modifyOrder);
+		std::shared_ptr<OrderbookEntry> tryGetOrder(long orderId);
 		bool containsOrder(long orderId);
 
 		Spread getSpread();

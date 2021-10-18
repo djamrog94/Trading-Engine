@@ -23,6 +23,8 @@ namespace TradingEngine::Orderbook {
 		void changeOrder(Orders::ModifyOrder modifyOrder);
 		void removeOrder(Orders::CancelOrder cancelOrder);
 		bool containsOrder(long orderId);
+		Orders::ModifyOrderType getModifyOrderType(Orders::ModifyOrder modifyOrder);
+		std::shared_ptr<OrderbookEntry> tryGetOrder(long orderId);
 		std::vector<std::shared_ptr<OrderbookEntry>> getAskOrders();
 		std::vector<std::shared_ptr<OrderbookEntry>> getBidOrders();
 		Spread getSpread();

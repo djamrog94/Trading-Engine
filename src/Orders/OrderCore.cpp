@@ -26,7 +26,6 @@ namespace TradingEngine::Orders {
 	{
 		return std::string();
 	}
-
 	std::ostream& operator<<(std::ostream& outs, const OrderCore& oc)
 	{
 		return outs << "[OrderId=" << oc.getOrderId() << "]" << " - Username="

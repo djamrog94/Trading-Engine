@@ -23,6 +23,16 @@ namespace TradingEngine::Orderbook {
 		std::lock_guard<std::mutex> guard(ob_mutex);
 		orderbook_->removeOrder(cancelOrder);
 	}
+	Orders::ModifyOrderType MatchingOrderbook::getModifyOrderType(Orders::ModifyOrder modifyOrder)
+	{
+		std::lock_guard<std::mutex> guard(ob_mutex);
+		return orderbook_->getModifyOrderType(modifyOrder);
+	}
+	std::shared_ptr<OrderbookEntry> MatchingOrderbook::tryGetOrder(long orderId)
+	{
+		std::lock_guard<std::mutex> guard(ob_mutex);
+		return orderbook_->tryGetOrder(orderId);
+	}
 	bool MatchingOrderbook::containsOrder(long orderId)
 	{
 		std::lock_guard<std::mutex> guard(ob_mutex);

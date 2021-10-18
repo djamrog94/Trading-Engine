@@ -14,11 +14,10 @@ namespace TradingEngine::Orders {
 		std::string toString() const;
 
 	private:
-		const long orderId_;
-		const std::string username_;
-		const int securityId_;
+		long orderId_;
+		std::string username_;
+		int securityId_;
 	};
-
 
 	std::ostream& operator << (std::ostream& outs, const OrderCore& oc);
 }

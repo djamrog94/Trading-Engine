@@ -6,6 +6,9 @@
 #include "TradingEngine/Orderbook/OrderIdGenerator.h"
 #include "TradingEngine/Orderbook/FifoOrderbook.h"
 #include "TradingEngine/Orderbook/OrderbookFactory.h"
+#include <chrono>
+#include <cctype>
+#include <random>
 
 namespace TradingEngine {
 	//Orders::OrderCore oc = Orders::OrderCore(0, "test", 0);
@@ -293,41 +296,70 @@ namespace TradingEngine {
 	BOOST_AUTO_TEST_CASE(FifoOrderbookFourOrdersPerfectMatch)
 	{
 		const long askOrderOrderId = 0;
-		const long asksecondOrderOrderId = 1;
-		const long buyOrderOrderId = 2;
-		const long buySecondOrderOrderId = 3;
-		const long askPrice = 10000;
-		const long bidPrice = 10001;
+		//const long asksecondOrderOrderId = 1;
+		//const long buyOrderOrderId = 2;
+		//const long buySecondOrderOrderId = 3;
+		//const long askPrice = 10000;
+		//const long bidPrice = 10001;
 		Orders::OrderCore ao = Orders::OrderCore(askOrderOrderId, "test1", 1);
-		Orders::OrderCore ao2 = Orders::OrderCore(asksecondOrderOrderId, "test1", 1);
-		Orders::OrderCore bo = Orders::OrderCore(buyOrderOrderId, "test1", 1);
-		Orders::OrderCore bo2 = Orders::OrderCore(buySecondOrderOrderId, "test1", 1);
+		//Orders::OrderCore ao2 = Orders::OrderCore(asksecondOrderOrderId, "test1", 1);
+		//Orders::OrderCore bo = Orders::OrderCore(buyOrderOrderId, "test1", 1);
+		//Orders::OrderCore bo2 = Orders::OrderCore(buySecondOrderOrderId, "test1", 1);
 
-		//Orderbook::Orderbook* ob = new Orderbook::Orderbook();
-		//Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm* test = new Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm();
-		//Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob, test);
+		////Orderbook::Orderbook* ob = new Orderbook::Orderbook();
+		////Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm* test = new Orderbook::MatchingAlgorithm::FifoMatchingAlgorithm();
+	    ////Orderbook::FifoOrderbook fifoMatcher = Orderbook::FifoOrderbook(ob, test);
 		Orderbook::MatchingOrderbook fifoMatcher = Orderbook::OrderbookFactory::createOrderbook(Instrument::Security());
-		// price, quantity
-		Orders::Order askOrder = Orders::Order(ao, askPrice, 10, false);
-		Orders::Order askOrder2 = Orders::Order(ao2, askPrice, 20, false);
-		Orders::Order buyOrder = Orders::Order(bo, bidPrice, 15, true);
-		Orders::Order buyOrder2 = Orders::Order(bo2, bidPrice, 15, true);
-		fifoMatcher.addOrder(askOrder);
-		fifoMatcher.addOrder(askOrder2);
-		fifoMatcher.addOrder(buyOrder);
-		fifoMatcher.addOrder(buyOrder2);
-		auto results = fifoMatcher.match();
-		auto spread = fifoMatcher.getSpread();
+		//// price, quantity
 
-		BOOST_TEST(results.getFills().size() == 6);
-		BOOST_TEST(results.getTrades().size() == 3);
-		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(askOrderOrderId) == false);
-		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(asksecondOrderOrderId) == false);
-		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buyOrderOrderId) == false);
-		BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buySecondOrderOrderId) == false);
-		BOOST_TEST(NULL == spread.getAsk().value());
-		BOOST_TEST(NULL == spread.getBid().value());
 
+		//using u32 = uint_least32_t;
+		//using engine = std::mt19937;
+
+		//std::random_device os_seed;
+		//const u32 seed = os_seed();
+
+		//engine generator(seed);
+		//std::uniform_int_distribution< u32 > distribute(1, 10);
+		//std::vector<Orders::Order> orders;
+		//bool buy;
+		//for (int i = 0; i < 100; i++)
+		//{
+		//	if (i % 2 == 0)
+		//		buy = true;
+		//	else
+		//		buy = false;
+		//	//orders.push_back(Orders::Order(ao, distribute(generator), distribute(generator), buy));
+		//	orders.emplace_back(ao, 1,1, buy);
+		//}
+		//for (auto order : orders)
+		//	fifoMatcher.addOrder(order);
+
+		//std::chrono::time_point<std::chrono::high_resolution_clock> startPoint = std::chrono::high_resolution_clock::now();
+		//auto results = fifoMatcher.match();
+		//std::chrono::time_point<std::chrono::high_resolution_clock> endPoint = std::chrono::high_resolution_clock::now();
+		//
+		//auto start = std::chrono::time_point_cast<std::chrono::microseconds>(startPoint).time_since_epoch().count();
+		//auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endPoint).time_since_epoch().count();
+		//auto duration = end - start;
+		//std::cout << duration << std::endl;
+		//auto spread = fifoMatcher.getSpread();
+
+		//BOOST_TEST(results.getFills().size() == 6);
+		//BOOST_TEST(results.getTrades().size() == 3);
+		//BOOST_TEST(fifoMatcher.orderbook_->containsOrder(askOrderOrderId) == false);
+		//BOOST_TEST(fifoMatcher.orderbook_->containsOrder(asksecondOrderOrderId) == false);
+		//BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buyOrderOrderId) == false);
+		//BOOST_TEST(fifoMatcher.orderbook_->containsOrder(buySecondOrderOrderId) == false);
+		//BOOST_TEST(NULL == spread.getAsk().value());
+		//BOOST_TEST(NULL == spread.getBid().value());
+	}
+
+	BOOST_AUTO_TEST_CASE(TestOrderCoreOutput)
+	{
+		Orders::OrderCore ao = Orders::OrderCore(0, "test1", 1);
+		Orders::Order askOrder = Orders::Order(ao, 15, 10, false);
+		std::cout << askOrder << std::endl;
 
 	}
 

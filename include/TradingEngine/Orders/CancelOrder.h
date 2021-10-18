@@ -8,7 +8,7 @@ namespace TradingEngine::Orders {
 	{
 	public:
 		CancelOrder(OrderCore& orderBase);
-
-		CancelOrder(ModifyOrder& modifyOrder);
+		OrderCore orderBase_;
 	};
+	std::ostream& operator << (std::ostream& outs, const CancelOrder& co);
 }

@@ -1,24 +1,34 @@
 #pragma once
+#include "TradingEngine/Orders/OrderCore.h"
+
 namespace TradingEngine::Orderbook::Reject {
 	enum class rejectionReason
 	{
 		Unkown,
 		OrderNotFound,
+		OrderIdAlreadyPresent,
 		InstrumentNotFound,
-		AttemptingToModifyWrongSide
+		AttemptingToModifyWrongSide,
+		ModifyOrderDoesntModifyAnything
 	};
 
 	class Rejection
 	{
 	public:
-		Rejection(long roid, rejectionReason rr);
+		Rejection(Orders::OrderCore rejectedOrder, rejectionReason rr);
 
 		Reject::rejectionReason getRejectionReason();
-		long getRejectedOrderId();
+		Orders::OrderCore getOrderCore();
+		Rejection& operator=(const Rejection& rhs)
+		{
+			rr_ = rhs.rr_;
+			orderBase_ = rhs.orderBase_;
+			return *this;
+		}
 
 	private:
 		rejectionReason rr_;
-		long roid_;
+		Orders::OrderCore orderBase_;
 
 	};
 }

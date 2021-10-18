@@ -14,11 +14,15 @@ namespace TradingEngine::Orders {
 
 
 	Order::Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide)
-		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()),
+		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()), orderBase_(orderBase),
 		price_(price), currentQuantity_(quantity), initialQuantity_(quantity), isBuySide_(isBuySide) {}
 	
+	std::ostream& operator << (std::ostream& outs, const Order& ord)
+	{
+		return outs << ord.orderBase_ << ": " << "Price: " << ord.price_ << ", " << "InitialQuantity: " << ord.initialQuantity_ << ", " << "CurrentQuantity: " << ord.currentQuantity_ << ", " << "IsBuySide: " << ord.isBuySide_ << std::endl;
+	}
 	
-	Order::Order(ModifyOrder& modifyOrder)
-		: OrderCore(modifyOrder.getOrderId(), modifyOrder.getUsername(), modifyOrder.getSecurityId()), price_(modifyOrder.getPrice()), initialQuantity_(modifyOrder.getQuantity()),
-		currentQuantity_(modifyOrder.getQuantity()), isBuySide_(modifyOrder.getIsBuySide()) {}
+//	Order::Order(ModifyOrder& modifyOrder)
+	//	: OrderCore(modifyOrder.getOrderId(), modifyOrder.getUsername(), modifyOrder.getSecurityId()), price_(modifyOrder.getPrice()), initialQuantity_(modifyOrder.getQuantity()),
+	//	currentQuantity_(modifyOrder.getQuantity()), isBuySide_(modifyOrder.getIsBuySide()) {}
 }

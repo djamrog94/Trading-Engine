@@ -8,7 +8,7 @@ namespace TradingEngine::Orders {
 	public:
 		Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide);
 
-		Order(ModifyOrder& modifyOrder);
+		//Order(ModifyOrder& modifyOrder);
 		friend bool operator==(const Order& lhs, const Order& rhs);
 
 		void IncreaseQuantity(uint16_t quantityDelta);
@@ -18,8 +18,10 @@ namespace TradingEngine::Orders {
 		uint16_t initialQuantity_;
 		uint16_t currentQuantity_;
 		bool isBuySide_;
+		OrderCore orderBase_;
 	};
 
+	std::ostream& operator << (std::ostream& outs, const Order& ord);
 
 	inline bool operator==(const Order& lhs, const Order& rhs)
 	{

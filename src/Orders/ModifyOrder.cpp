@@ -15,6 +15,23 @@ namespace TradingEngine::Orders {
 		return isBuySide_;
 	}
 
+	CancelOrder ModifyOrder::toCancelOrder()
+	{
+		OrderCore newOrderCore = OrderCore(getOrderId(), getUsername(), getSecurityId());
+		return CancelOrder(newOrderCore);
+	}
+
+	Order ModifyOrder::toNewOrder()
+	{
+		OrderCore newOrderCore = OrderCore(getOrderId(), getUsername(), getSecurityId());
+		return Order(newOrderCore, price_, modifyQuantity_, isBuySide_);
+	}
+
 	ModifyOrder::ModifyOrder(OrderCore& orderBase, long price, uint16_t modifyQuantity, bool isBuySide)
-		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()), price_(price), modifyQuantity_(modifyQuantity), isBuySide_(isBuySide) {}
+		: OrderCore(orderBase.getOrderId(), orderBase.getUsername(), orderBase.getSecurityId()), orderBase_(orderBase), price_(price), modifyQuantity_(modifyQuantity), isBuySide_(isBuySide) {}
+	
+	std::ostream& operator << (std::ostream& outs, const ModifyOrder& mo)
+	{
+		return outs << mo.orderBase_ << ": " << "Price: " << mo.price_ << ", " << "Quantity: " << mo.modifyQuantity_ << ", " << "IsBuySide: " << mo.isBuySide_ << std::endl;
+	}
 }

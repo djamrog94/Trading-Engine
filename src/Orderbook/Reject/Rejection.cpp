@@ -6,11 +6,12 @@ namespace TradingEngine::Orderbook::Reject {
 		return rr_;
 	}
 
-	long Rejection::getRejectedOrderId()
+	Orders::OrderCore Rejection::getOrderCore()
 	{
-		return roid_;
+		return orderBase_;
 	}
 
-	Rejection::Rejection(long roid, rejectionReason rr)
-		: roid_(roid), rr_(rr) {}
+
+	Rejection::Rejection(Orders::OrderCore rejectedOrder, rejectionReason rr)
+		: orderBase_(rejectedOrder), rr_(rr) {}
 }

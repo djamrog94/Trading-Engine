@@ -43,7 +43,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -133,6 +133,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Users\brody\source\repos\tcp-server\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -257,6 +258,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Orderbook\ExchangeResult.cpp" />
+    <ClCompile Include="src\Orderbook\RejectGenerator.cpp" />
     <ClCompile Include="src\Orderbook\OrderbookFactory.cpp" />
     <ClCompile Include="src\Instrument\Security.cpp" />
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp" />
@@ -290,10 +294,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Logging\ServerLogger.cpp" />
-    <ClCompile Include="src\TradingEngine\TradingEngine.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="tests\OrderbookTest.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -302,6 +302,7 @@
     <ClCompile Include="src\Exchange\TradingExchange.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\TradingEngine\Orderbook\ExchangeResult.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\FifoOrderbook.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h" />
@@ -332,12 +333,9 @@
     <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\MatchingAlgorithm.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\OrderbookFactory.h" />
+    <ClInclude Include="include\TradingEngine\Orderbook\RejectGenerator.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h" />
-    <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug UnitTests|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='test|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\Spread.h" />
     <ClInclude Include="include\TradingEngine\Orderbook\TradeIdGenerator.h" />
     <ClInclude Include="include\TradingEngine\Exchange\TradingExchange.h" />
@@ -348,6 +346,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
     <None Include="src\Exchange\config.yaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,8 +1,8 @@
 #include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 namespace TradingEngine::Orderbook::Reject {
-	Rejection RejectCreator::generateModyifyRejection(Orders::ModifyOrder mo, Reject::rejectionReason rr)
+	Rejection RejectCreator::generateOrderCoreReject(Orders::OrderCore oc, Reject::rejectionReason rr)
 	{
-		Rejection newRej = Rejection(mo.getOrderId(), rr);
+		Rejection newRej = Rejection(oc, rr);
 		return newRej;
 	}
 }
