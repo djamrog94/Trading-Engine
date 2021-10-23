@@ -1,12 +1,13 @@
 #include "../include/TradingEngine/Orders/OrderCore.h"
 #include "../include/TradingEngine/Orderbook/Orderbook.h"
 #include "../include/TradingEngine/Orderbook/Trade.h"
-#include "../include/TradingEngine/Orderbook/OrderIdGenerator.h"
 #include "../include/TradingEngine/Orderbook/FifoOrderbook.h"
 #include "../include/TradingEngine/Orderbook/OrderbookFactory.h"
 #include <chrono>
 #include <cctype>
 #include <random>
+#include <boost/optional/optional_io.hpp>
+
 int main()
 {
 	// price, quantity
@@ -30,13 +31,14 @@ int main()
 		std::uniform_int_distribution< u32 > distribute(1, 10);
 		std::vector<TradingEngine::Orders::Order> orders;
 		bool buy;
-		for (int i = 0; i < 100000; i++)
+		for (int i = 0; i < 10000; i++)
 		{
 			if (i % 2 == 0)
 				buy = true;
 			else
 				buy = false;
-			orders.push_back(TradingEngine::Orders::Order(ao, distribute(generator), distribute(generator), buy));
+			//orders.push_back(TradingEngine::Orders::Order(ao, distribute(generator), distribute(generator), buy));
+			orders.push_back(TradingEngine::Orders::Order(ao, 10, 10, buy));
 		}
 		for (auto order : orders)
 			fifoMatcher.addOrder(order);
@@ -50,8 +52,11 @@ int main()
 		trades += results.getTrades().size();
 		orders.clear();
 		auto duration = end - start;
+		auto spread = fifoMatcher.getSpread();
 		std::cout << "Iteration " << it << ": " << duration << std::endl;
 		std::cout << "Iteration " << it << ": " << results.getTrades().size() << "trades" << std::endl;
+		std::cout << "Iteration " << it << ": " << "Bid: " << spread.getBid() << std::endl;
+		std::cout << "Iteration " << it << ": " << "Ask: " << spread.getAsk() << std::endl;
 		total += duration;
 	}
 	std::cout << total << std::endl;

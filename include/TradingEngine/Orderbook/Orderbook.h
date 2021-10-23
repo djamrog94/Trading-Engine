@@ -1,6 +1,6 @@
 #pragma once
-#include "TradingEngine/Orderbook/OrderEntryOrderbook.h"
 #include "TradingEngine/Instrument/Security.h"
+#include "TradingEngine/Orderbook/Spread.h"
 #include <map>
 #include <vector>
 #include <set>
@@ -14,10 +14,9 @@ namespace TradingEngine::Orderbook {
 	{
 		return (*x).price_ < (*y).price_;
 	};
-	class Orderbook : public RetrievalOrderbook
+	class Orderbook 
 	{
 	public:
-		//Orderbook();
 		Orderbook(Instrument::Security security);
 		void addOrder(Orders::Order order);
 		void changeOrder(Orders::ModifyOrder modifyOrder);

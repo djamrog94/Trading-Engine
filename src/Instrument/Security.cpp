@@ -1,3 +1,10 @@
+/**
+ *  @file   Security.cpp
+ *  @brief  Security Object
+ *  @author David
+ *  @date   2021-15-10
+ ***********************************************/
+
 #include "TradingEngine/Instrument/Security.h"
 namespace TradingEngine::Instrument {
 	Security::Security() = default;

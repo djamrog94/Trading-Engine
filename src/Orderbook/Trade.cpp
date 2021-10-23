@@ -12,5 +12,5 @@ namespace TradingEngine::Orderbook {
 		return currentTradeNumber_;
 	}
 	;
-	
+
 }

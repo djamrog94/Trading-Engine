@@ -1,3 +1,10 @@
+/**
+ *  @file   ModifyOrder.h
+ *  @brief  Modify order header 
+ *  @author David
+ *  @date   2021-15-10
+ ***********************************************/
+
 #pragma once
 #include "TradingEngine/Orders/OrderCore.h"
 #include "TradingEngine/Orders/Order.h"
@@ -12,8 +19,10 @@ namespace TradingEngine::Orders {
 		Quantity,
 		PriceAndQuantity,
 	};
+
 	class Order;
 	class CancelOrder;
+
 	class ModifyOrder : public OrderCore
 	{
 	public:

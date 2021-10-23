@@ -3,11 +3,7 @@
 
 namespace TradingEngine::Orderbook::MatchingAlgorithm {
 	FifoMatchingAlgorithm::FifoMatchingAlgorithm() = default;
-	MatchingAlgorithm FifoMatchingAlgorithm::getMatchingAlgorithm()
-	{
-		MatchingAlgorithm newMatchingAlgorithm = FifoMatchingAlgorithm();
-		return newMatchingAlgorithm;
-	}
+
 	MatchResult FifoMatchingAlgorithm::match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks)
 	{
 		MatchResult matchResult = MatchResult();

@@ -1,3 +1,10 @@
+/**
+ *  @file   Order.h
+ *  @brief  Order header file
+ *  @author David
+ *  @date   2021-15-10
+ ***********************************************/
+
 #pragma once
 #include "TradingEngine/Orders/OrderCore.h"
 #include "TradingEngine/Orders/ModifyOrder.h"
@@ -7,8 +14,6 @@ namespace TradingEngine::Orders {
 	{
 	public:
 		Order(OrderCore& orderBase, long price, uint16_t quantity, bool isBuySide);
-
-		//Order(ModifyOrder& modifyOrder);
 		friend bool operator==(const Order& lhs, const Order& rhs);
 
 		void IncreaseQuantity(uint16_t quantityDelta);
@@ -25,7 +30,10 @@ namespace TradingEngine::Orders {
 
 	inline bool operator==(const Order& lhs, const Order& rhs)
 	{
-		if (lhs.getOrderId() == rhs.getOrderId() && lhs.getUsername() == rhs.getUsername() && lhs.getSecurityId() == rhs.getSecurityId()) return true;
+		if (lhs.getOrderId() == rhs.getOrderId() &&
+			lhs.getUsername() == rhs.getUsername() &&
+			lhs.getSecurityId() == rhs.getSecurityId())
+			return true;
 		return false;
 	}
 }

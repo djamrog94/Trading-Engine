@@ -1,3 +1,10 @@
+/**
+ *  @file   Security.h
+ *  @brief  Security header
+ *  @author David
+ *  @date   2021-15-10
+ ***********************************************/
+
 #pragma once
 #include <string>
 #include "TradingEngine/Orderbook/MatchingAlgorithm/MatchingAlgorithm.h"

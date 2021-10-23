@@ -1,6 +1,6 @@
 #include "TradingEngine/Orderbook/MatchingOrderbook.h"
 namespace TradingEngine::Orderbook {
-	MatchingOrderbook::MatchingOrderbook(std::unique_ptr<RetrievalOrderbook> orderbook, std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> matchingAlgorithm) 
+	MatchingOrderbook::MatchingOrderbook(std::unique_ptr<Orderbook> orderbook, std::unique_ptr<MatchingAlgorithm::MatchingAlgorithm> matchingAlgorithm) 
 		:orderbook_(std::move(orderbook)), matchingAlgorithm_(std::move(matchingAlgorithm)) {}
 	int MatchingOrderbook::getCount()
 	{
@@ -49,7 +49,6 @@ namespace TradingEngine::Orderbook {
 		std::vector<std::shared_ptr<OrderbookEntry>> bids = orderbook_->getBidOrders();
 		std::vector<std::shared_ptr<OrderbookEntry>> asks = orderbook_->getAskOrders();
 		MatchResult matchResult = matchingAlgorithm_->match(bids, asks);
-		//std::set<Fill, decltype(compareFill)> fullyFilledOrders;
 		std::vector<Fill> fullyFilledOrders;
 		std::vector<Fill> fills = matchResult.getFills();
 		std::for_each(fills.begin(), fills.end(), [&](Fill f) {if (f.isCompleteFill_) fullyFilledOrders.push_back(f); });

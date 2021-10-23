@@ -8,7 +8,6 @@ namespace TradingEngine::Orderbook {
 	class OrderbookFactory
 	{
 	public:
-
 		static MatchingOrderbook createOrderbook(Instrument::Security inst);
 	};
 }
