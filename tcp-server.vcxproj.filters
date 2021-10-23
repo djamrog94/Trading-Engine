@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TradingEngine\TradingEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Logging\ServerLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,40 +36,13 @@
     <ClCompile Include="src\Orderbook\Spread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\Reject\Rejection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\Reject\RejectCreator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderStatuses\NewOrderStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderStatuses\ModifyOrderStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderStatuses\CancelOrderStatus.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Orderbook\Limit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Orderbook\OrderbookEntry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\ActionResultConversion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderBookResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderEntryOrderbook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Orderbook\MatchingOrderbook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\Orderbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\OrderbookTest.cpp">
@@ -81,38 +51,38 @@
     <ClCompile Include="src\Orderbook\Fill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Orderbook\MatchResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\Trade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\TradeUtilities.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\OrderIdGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\AbstractOrderbook.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Orderbook\MatchingAlgorithm\MatchingAlgorithm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Orderbook\FifoOrderbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Instrument\Security.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\OrderbookFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\MatchResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\Trade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\Orderbook\TradeIdGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\TradeUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Orderbook\Orderbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\TradingEngine\TradingEngine\TradingEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Logging\ServerLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -134,58 +104,16 @@
     <ClInclude Include="include\TradingEngine\Orderbook\Spread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\Reject\Rejection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\Reject\RejectCreator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderStatuses\NewOrderStatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderStatuses\ModifyOrderStatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderStatuses\CancelOrderStatus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\Limit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\OrderbookEntry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\ActionResultConversion.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderBookResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderEntryOrderbook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingOrderbook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\Orderbook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\Fill.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\MatchResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\Trade.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\TradeUtilities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\OrderIdGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TradingEngine\Orderbook\AbstractOrderbook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\MatchingAlgorithm.h">
@@ -197,7 +125,25 @@
     <ClInclude Include="include\TradingEngine\Orderbook\MatchingAlgorithm\FifoMatchingAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\TradingEngine\Instrument\Security.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\OrderbookFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\MatchResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\Trade.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\TradingEngine\Orderbook\TradeIdGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\TradeUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TradingEngine\Orderbook\Orderbook.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -208,5 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
 </Project>

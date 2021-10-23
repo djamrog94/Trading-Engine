@@ -7,9 +7,7 @@ namespace TradingEngine::Orderbook::MatchingAlgorithm {
 	{
 	public:
 		FifoMatchingAlgorithm();
-		static MatchingAlgorithm getMatchingAlgorithm();
-		MatchResult match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks);
-		//MatchResult match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks);
+		MatchResult match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks) override;
 	};
 }
 

@@ -17,4 +17,3 @@ namespace TradingEngine::Orderbook {
 
 	};
 }
-

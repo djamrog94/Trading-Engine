@@ -1,25 +1,17 @@
 #include "TradingEngine/Orderbook/Orderbook.h"
-#include "TradingEngine/Orderbook/ActionResultConversion.h"
-#include "TradingEngine/Orderbook/Reject/RejectCreator.h"
 namespace TradingEngine::Orderbook {
 
-    Orderbook::Orderbook() : RetrievalOrderbook() {};
-    Orderbook::Orderbook(Instrument instrument)
-        : RetrievalOrderbook(), instrument_(instrument) {}
+    Orderbook::Orderbook(Instrument::Security security) : security_(security) {}
 
-    OrderBookResult Orderbook::addOrder(Orders::Order order)
+    void Orderbook::addOrder(Orders::Order order)
     {
-        OrderBookResult ar = OrderBookResult();
         std::shared_ptr<Limit> baseLimit = std::make_shared<Limit>(order.price_);
         if (order.isBuySide_) addOrder(order, baseLimit, bidLimits_, orders_);
         else addOrder(order, baseLimit, askLimits_, orders_);
-        ar.AddNewOrderStatus(ActionResultConversion::generateNewOrderStatus(order));
-        return OrderBookResult();
     }
 
-    OrderBookResult Orderbook::changeOrder(Orders::ModifyOrder modifyOrder)
+    void Orderbook::changeOrder(Orders::ModifyOrder modifyOrder)
     {
-        OrderBookResult ar = OrderBookResult();
         auto mod = orders_.find(modifyOrder.getOrderId());
         
         // if order exists
@@ -28,10 +20,8 @@ namespace TradingEngine::Orderbook {
             std::shared_ptr<OrderbookEntry> obe = mod->second;
             if (modifyOrder.isBuySide_ != (*obe).getCurrent().isBuySide_)
             {
-                ar.AddRejection(Reject::RejectCreator::generateModyifyRejection(modifyOrder, Reject::rejectionReason::AttemptingToModifyWrongSide));
-                return ar;
             }
-            Orders::CancelOrder co = Orders::CancelOrder(modifyOrder);
+            Orders::CancelOrder co = modifyOrder.toCancelOrder();
             if (obe->currentOrder_.isBuySide_)
             {
                 removeOrder(co, obe, bidLimits_, orders_);
@@ -40,22 +30,14 @@ namespace TradingEngine::Orderbook {
             {
                 removeOrder(co, obe, askLimits_, orders_);
             }
-            Orders::Order ord = Orders::Order(modifyOrder);
+            Orders::Order ord = modifyOrder.toNewOrder();
             if (modifyOrder.isBuySide_) addOrder(ord, (*obe).getParentLimit(), bidLimits_, orders_);
             else addOrder(ord, (*obe).getParentLimit(), askLimits_, orders_);
         }
-        else
-        {
-            ar.AddRejection(Reject::RejectCreator::generateModyifyRejection(modifyOrder, Reject::rejectionReason::OrderNotFound));
-            return ar;
-        }
-        ar.AddModifyOrderStatus(ActionResultConversion::generateModifyOrderStatus(modifyOrder));
-        return ar;
     }
 
-    OrderBookResult Orderbook::removeOrder(Orders::CancelOrder cancelOrder)
+    void Orderbook::removeOrder(Orders::CancelOrder cancelOrder)
     {
-        OrderBookResult ar = OrderBookResult();
         auto can = orders_.find(cancelOrder.getOrderId());
         
         // if order exists
@@ -70,14 +52,46 @@ namespace TradingEngine::Orderbook {
             {
                 removeOrder(cancelOrder, obe, askLimits_, orders_);
             }
-            ar.AddCancelOrderStatus(ActionResultConversion::generateCancelOrderStatus(cancelOrder));
         }
-        return ar;
     }
 
     bool Orderbook::containsOrder(long orderId)
     {
         return orders_.contains(orderId);
+    }
+
+    Orders::ModifyOrderType Orderbook::getModifyOrderType(Orders::ModifyOrder modifyOrder)
+    {
+        auto it = orders_.find(modifyOrder.getOrderId());
+        OrderbookEntry obe = *(*it).second;
+        if (it != orders_.end())
+        {
+            if (obe.currentOrder_.price_ != modifyOrder.price_ && obe.currentOrder_.initialQuantity_ != modifyOrder.modifyQuantity_)
+            {
+                return Orders::ModifyOrderType::PriceAndQuantity;
+            }
+            else if (obe.currentOrder_.price_ != modifyOrder.price_)
+            {
+                return Orders::ModifyOrderType::Price;
+            }
+            else if (obe.currentOrder_.initialQuantity_ != modifyOrder.modifyQuantity_)
+            {
+                return Orders::ModifyOrderType::Quantity;
+            }
+            else
+            {
+                return Orders::ModifyOrderType::NoChange;
+            }
+        }
+        return Orders::ModifyOrderType::Unknown;
+    }
+
+    std::shared_ptr<OrderbookEntry> Orderbook::tryGetOrder(long orderId)
+    {
+        auto it = orders_.find(orderId);
+        if (it != orders_.end())
+            return it->second;
+        return std::shared_ptr<OrderbookEntry>();
     }
 
 
@@ -116,7 +130,6 @@ namespace TradingEngine::Orderbook {
     Spread Orderbook::getSpread()
     {
         boost::optional<long> bestAsk = NULL, bestBid = NULL;
-        // in c# first element in sorted set and min are different, in c++ is this ok?
         if (!askLimits_.empty()) bestAsk = (*(*askLimits_.begin())).price_;
         if (!bidLimits_.empty()) bestBid = (*(*bidLimits_.begin())).price_;
         return Spread(bestAsk, bestBid);
@@ -141,8 +154,6 @@ namespace TradingEngine::Orderbook {
             {
                 (*node.value()).head_ = newEntry;
                 (*node.value()).tail_ = newEntry;
-                //foundLimit.head_ = newEntry;
-                //foundLimit.tail_ = newEntry;
             }
             else
             {
@@ -156,18 +167,11 @@ namespace TradingEngine::Orderbook {
         }
         else
         {
-            //OrderbookEntry newEntry = OrderbookEntry(order, baseLimit);
             auto newEntry = std::make_shared<OrderbookEntry>(order, baseLimit);
             (*baseLimit).head_ = newEntry;
             (*baseLimit).tail_ = newEntry;
             limitLevels.insert(baseLimit);
 			internalBook.insert(std::pair<long,std::shared_ptr<OrderbookEntry>>(order.getOrderId(), std::move(newEntry)));
-            // need to get memory location of where obe is saved.
-            //auto test = internalBook.find(order.getOrderId());
-            //baseLimit.head_ = &test->second;
-            //baseLimit.tail_ = &test->second;
-
-            
         }
     }
     template <typename T>
@@ -192,7 +196,6 @@ namespace TradingEngine::Orderbook {
         else if ((*obe).Next != NULL) (*obe).Next->Previous = NULL;
 
         // update limit within list
-        //(*(*obe).getParentLimit()).head_
         if ( (*(*obe).getParentLimit()).head_ == obe && (*(*obe).getParentLimit()).tail_ == obe )
         {
             (*(*obe).getParentLimit()).head_ = NULL;

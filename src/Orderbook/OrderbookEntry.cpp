@@ -22,12 +22,4 @@ namespace TradingEngine::Orderbook {
 	{
 		return *Previous;
 	}
-	//void OrderbookEntry::setNext(OrderbookEntry& next)
-	//{
-	//	Next = &next;
-	//}
-	//void OrderbookEntry::setPrevious(OrderbookEntry& prev)
-	//{
-	//	Previous = &prev;
-	//}
 }

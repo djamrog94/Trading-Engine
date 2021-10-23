@@ -14,8 +14,6 @@ namespace TradingEngine::Orderbook {
 		friend bool operator==(const Limit& lhs, const Limit& rhs);
 
 		void setPrice(long price);
-/*		void setHead(OrderbookEntry& head);
-		void setTail(OrderbookEntry& tail)*/;
 
 		long price_;
 		mutable std::shared_ptr<OrderbookEntry> head_;
@@ -24,8 +22,8 @@ namespace TradingEngine::Orderbook {
 	
 	inline bool operator==(const Limit& lhs, const Limit& rhs)
 	{
-		if (lhs.price_ == rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_) return true;
-		//if (lhs.price_ == rhs.price_) return true;
+		if (lhs.price_ == rhs.price_ && lhs.head_ == rhs.head_ && lhs.tail_ == rhs.tail_)
+			return true;
 		return false;
 	}
 

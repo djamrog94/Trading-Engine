@@ -23,13 +23,4 @@ namespace TradingEngine::Orderbook {
 	{
 		price_ = price;
 	}
-
-	//void Limit::setHead(OrderbookEntry& head)
-	//{
-	//	head_ = &head;
-	//}
-	//void Limit::setTail(OrderbookEntry& tail)
-	//{
-	//	tail_ = &tail;
-	//}
 }

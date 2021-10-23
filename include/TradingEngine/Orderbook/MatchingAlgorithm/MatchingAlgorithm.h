@@ -6,7 +6,7 @@ namespace TradingEngine::Orderbook::MatchingAlgorithm {
 	class MatchingAlgorithm
 	{
 	public:
-		virtual MatchResult match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks) { return MatchResult(); };
+		virtual MatchResult match(std::vector<std::shared_ptr<OrderbookEntry>>& bids, std::vector<std::shared_ptr<OrderbookEntry>>& asks) = 0;
 	};
 }
 

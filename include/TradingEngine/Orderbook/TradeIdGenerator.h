@@ -6,9 +6,9 @@ namespace TradingEngine::Orderbook
 	{
 	public:
 		static TradeIdGenerator& Instance();
-		TradeIdGenerator(TradeIdGenerator const&) = delete;             
-		TradeIdGenerator(TradeIdGenerator&&) = delete;                  
-		TradeIdGenerator& operator=(TradeIdGenerator const&) = delete;  
+		TradeIdGenerator(TradeIdGenerator const&) = delete;
+		TradeIdGenerator(TradeIdGenerator&&) = delete;
+		TradeIdGenerator& operator=(TradeIdGenerator const&) = delete;
 		TradeIdGenerator& operator=(TradeIdGenerator&&) = delete;
 
 		static long generateTradeId();
@@ -17,4 +17,3 @@ namespace TradingEngine::Orderbook
 		TradeIdGenerator();
 	};
 }
-
